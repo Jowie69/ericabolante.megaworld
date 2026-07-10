@@ -1,755 +1,2225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Erica Bolante | Megaworld Property Specialist</title>
-<meta name="description" content="Erica Cristal Bolante — Megaworld-accredited property specialist. Explore residences across BGC, McKinley West, Northwin, Capital Town, Maple Grove &amp; Eastwood City.">
-
-<!-- Favicon using logo.png -->
-<link rel="icon" type="image/png" href="logo.png">
+<title>Erica Cristal | Megaworld RFO Premier Realtor</title>
+<meta name="description" content="Erica Cristal — Megaworld RFO Premier Realtor. Find your dream Ready-for-Occupancy condominium across Megaworld's premier townships in Metro Manila.">
+<link rel="icon" type="image/svg+xml" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
-
+<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   0. TOKENS
+   ============================================================ */
+:root{
+  --navy:#0A1B32;
+  --navy-deep:#050C18;
+  --navy-soft:#152847;
+  --gold:#C9A567;
+  --gold-bright:#F0D28C;
+  --gold-soft:#E8D3A0;
+  --bg:#FBFAF6;
+  --bg-alt:#F3F0E8;
+  --surface:#FFFFFF;
+  --text:#16213A;
+  --text-muted:#5B6478;
+  --border:#E7E2D3;
+  --shadow: 0 20px 50px -25px rgba(11,30,61,0.35);
+  --radius-sm:4px;
+  --radius-md:14px;
+  --radius-lg:22px;
+  --maxw:1180px;
+  --font-display:'Fraunces', serif;
+  --font-body:'Inter', sans-serif;
+
+  /* glass / showroom system */
+  --glass-bg:rgba(255,255,255,0.55);
+  --glass-bg-strong:rgba(255,255,255,0.72);
+  --glass-border:rgba(255,255,255,0.65);
+  --glass-blur:20px;
+  --glass-shadow:0 20px 60px -30px rgba(11,30,61,0.45);
+  --spot-gold:rgba(201,165,103,0.55);
+  --spot-white:rgba(255,255,255,0.9);
+  --scrim:rgba(5,12,24,0.5);
+}
+html[data-theme="dark"]{
+  --bg:#060D1A;
+  --bg-alt:#0A1424;
+  --surface:#0F1C33;
+  --navy:#0A1B32;
+  --navy-deep:#030710;
+  --navy-soft:#182D50;
+  --gold:#D9B76C;
+  --gold-bright:#F3D89A;
+  --gold-soft:#E9D3A2;
+  --text:#EDEAE0;
+  --text-muted:#98A3BC;
+  --border:#1C2A46;
+  --shadow: 0 20px 50px -25px rgba(0,0,0,0.6);
+
+  --glass-bg:rgba(16,30,56,0.55);
+  --glass-bg-strong:rgba(16,30,56,0.78);
+  --glass-border:rgba(255,255,255,0.09);
+  --glass-shadow:0 20px 60px -30px rgba(0,0,0,0.7);
+  --spot-gold:rgba(217,183,108,0.35);
+  --spot-white:rgba(255,255,255,0.14);
+  --scrim:rgba(2,5,10,0.65);
+}
+
+/* ambient showroom backdrop — soft gallery-light glow fixed behind the page */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(600px 400px at 12% -5%, var(--spot-gold), transparent 60%),
+    radial-gradient(500px 380px at 100% 10%, rgba(198,161,91,0.18), transparent 60%);
+  opacity:.7;
+}
+html[data-theme="dark"] body::before{opacity:1;}
+
+/* reusable glass surface */
+.glass{
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  box-shadow:var(--glass-shadow);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  transition:background .35s ease, color .35s ease;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4{
+  font-family:var(--font-display);
+  color:var(--text);
+  margin:0 0 .5em;
+  font-weight:500;
+  line-height:1.15;
+  letter-spacing:-0.01em;
+}
+p{margin:0 0 1em;color:var(--text-muted);}
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+ul{margin:0;padding:0;list-style:none;}
+button{font-family:inherit;cursor:pointer;}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-body);
+  font-size:12.5px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:14px;
+}
+.eyebrow::before{content:'';width:26px;height:1px;background:var(--gold);display:inline-block;}
+.section{padding:110px 0;}
+.section-alt{background:var(--bg-alt);}
+.section-head{max-width:640px;margin:0 0 56px;}
+.section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+.section-head h2{font-size:clamp(28px,3.6vw,42px);}
+.section-head p{font-size:17px;}
+
+/* Buttons */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:15px 28px;
+  border-radius:3px;
+  font-size:14.5px;
+  font-weight:600;
+  letter-spacing:.03em;
+  border:1px solid transparent;
+  transition:transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease;
+  white-space:nowrap;
+  position:relative;
+}
+.btn-gold{
+  background-image:
+    linear-gradient(120deg, transparent 0%, rgba(255,255,255,.6) 45%, transparent 60%),
+    linear-gradient(135deg, var(--gold-bright), var(--gold));
+  background-size:250% 100%, 100% 100%;
+  background-position:150% 0, 0 0;
+  background-repeat:no-repeat;
+  color:var(--navy-deep);box-shadow:0 10px 26px -14px rgba(201,165,103,.7);
+  transition:transform .25s ease, box-shadow .25s ease, background-position .7s ease;
+}
+.btn-gold:hover{transform:translateY(-2px); box-shadow:0 16px 34px -14px rgba(201,165,103,.85); background-position:-30% 0, 0 0;}
+.btn-outline{background:transparent;color:var(--text);border-color:var(--border);}
+html[data-theme="light"] .btn-outline{color:var(--navy);border-color:var(--navy);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);}
+.btn-ghost{background:transparent;color:var(--gold);padding:10px 4px;}
+.btn-ghost:hover{color:var(--gold-soft);}
+.btn-sm{padding:10px 18px;font-size:13px;}
+.btn-block{width:100%;}
+
+/* glass button — used on dark/photographic backgrounds regardless of site theme */
+.btn-glass{
+  background:rgba(255,255,255,.1);
+  color:#fff !important;
+  border-color:rgba(255,255,255,.4);
+  -webkit-backdrop-filter:blur(14px);
+  backdrop-filter:blur(14px);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.06);
+}
+.btn-glass:hover{background:rgba(255,255,255,.18);border-color:var(--gold-soft);color:var(--gold-soft) !important;transform:translateY(-2px);}
+
+/* Icon button */
+.icon-btn{
+  width:40px;height:40px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:50%;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text);
+  transition:border-color .25s ease, color .25s ease, transform .25s ease;
+}
+.icon-btn:hover{border-color:var(--gold);color:var(--gold);}
+.icon-btn svg{width:18px;height:18px;}
+
+/* scroll progress indicator — thin gold bar tracking page position */
+.scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg, var(--gold-soft), var(--gold-bright));
+  z-index:1100;
+  box-shadow:0 0 10px rgba(201,165,103,.6);
+  transition:width .1s linear;
+}
+
+/* ============================================================
+   1. HEADER
+   ============================================================ */
+.site-header{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  background:linear-gradient(to bottom, rgba(5,12,24,.35), transparent);
+  transition:background .35s ease, box-shadow .35s ease, padding .35s ease, backdrop-filter .35s ease;
+  padding:22px 0;
+}
+.site-header.scrolled{
+  background:var(--glass-bg-strong);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  backdrop-filter:blur(18px) saturate(160%);
+  box-shadow:0 1px 0 var(--glass-border), 0 20px 40px -30px rgba(0,0,0,.25);
+  padding:12px 0;
+}
+.nav-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.brand{display:flex;align-items:center;gap:12px;}
+.brand-mark{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--navy);color:var(--gold-soft);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--gold);flex:none;
+  overflow:hidden;
+  box-shadow:0 10px 22px -16px rgba(0,0,0,.55), 0 0 0 4px rgba(201,165,103,.12);
+}
+.brand-mark img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.brand-text{display:flex;flex-direction:column;line-height:1.25;}
+.brand-text strong{font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--text);}
+.site-header:not(.scrolled) .brand-text strong,
+.site-header:not(.scrolled) .brand-text small{color:#fff;}
+.brand-text small{font-size:11.5px;letter-spacing:.05em;color:var(--text-muted);}
+.nav-links{display:flex;align-items:center;gap:26px;}
+.nav-links a{
+  font-size:14px;font-weight:500;color:var(--text);
+  position:relative;padding:4px 0;
+}
+.site-header:not(.scrolled) .nav-links a{color:#fff;}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:var(--gold);
+  transition:width .25s ease;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-actions{display:flex;align-items:center;gap:12px;}
+.site-header:not(.scrolled) .icon-btn{border-color:rgba(255,255,255,.35);color:#fff;}
+.nav-burger{display:none;background:none;border:none;color:var(--text);}
+.site-header:not(.scrolled) .nav-burger{color:#fff;}
+.nav-burger svg{width:24px;height:24px;}
+
+@media (max-width:960px){
+  .site-header{
+    padding:14px 0;
+  }
+  .site-header.menu-open{
+    background:var(--surface);
+  }
+  .site-header.menu-open .brand-text strong{color:var(--text);}
+  .site-header.menu-open .brand-text small{color:var(--text-muted);}
+  .site-header.menu-open .nav-burger,
+  .site-header.menu-open .icon-btn{
+    color:var(--text);
+    border-color:var(--border);
+  }
+  .nav-links{
+    position:fixed;top:0;right:0;height:100vh;width:min(82vw,320px);
+    background:var(--navy-deep);
+    flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:40px;gap:24px;
+    transform:translateX(100%);
+    transition:transform .35s ease;
+    z-index:950;
+    overflow-y:auto;
+    box-shadow:-30px 0 70px -45px rgba(0,0,0,.8);
+  }
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{color:#fff !important;font-size:16px;}
+  .nav-burger{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;z-index:960;}
+  .nav-actions .btn-gold{display:none;}
+}
+
+/* ============================================================
+   2. HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:92vh;
+  display:flex;align-items:center;
+  background:linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 55%, var(--navy-soft) 100%);
+  overflow:hidden;
+  padding:128px 0 48px;
+}
+/* showroom spotlight glows — soft gallery track-lighting ambience */
+.hero::before,.hero::after{
+  content:'';position:absolute;border-radius:50%;pointer-events:none;
+  filter:blur(10px);z-index:0;
+}
+.hero::before{
+  width:640px;height:640px;top:-260px;left:8%;
+  background:radial-gradient(circle, rgba(240,210,140,.20) 0%, transparent 70%);
+  animation:driftGlow 16s ease-in-out infinite;
+}
+.hero::after{
+  width:520px;height:520px;bottom:-220px;right:4%;
+  background:radial-gradient(circle, rgba(240,210,140,.14) 0%, transparent 72%);
+  animation:driftGlow 20s ease-in-out infinite reverse;
+}
+@keyframes driftGlow{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(30px,-20px) scale(1.08);}
+}
+.hero-inner{
+  max-width:var(--maxw);margin:0 auto;padding:0 28px;
+  position:relative;z-index:2;
+  color:#fff;
+  width:100%;
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;}
+.hero .eyebrow{color:var(--gold-soft);}
+.hero .eyebrow::before{background:var(--gold-soft);}
+.hero h1{
+  color:#fff;font-size:clamp(36px,5.6vw,64px);max-width:760px;font-weight:500;
+}
+.hero h1 em{
+  font-style:italic;
+  background:linear-gradient(100deg, var(--gold-soft), var(--gold-bright) 45%, var(--gold-soft));
+  background-size:220% auto;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:textShimmer 5s linear infinite;
+}
+@keyframes textShimmer{
+  0%{background-position:0% 50%;}
+  100%{background-position:220% 50%;}
+}
+.hero-sub{color:rgba(255,255,255,.72);max-width:560px;font-size:17.5px;}
+.hero-cta{display:flex;flex-wrap:wrap;gap:16px;margin:30px 0 22px;}
+.hero-trust{
+  display:flex;align-items:center;gap:8px;
+  font-size:12.5px;letter-spacing:.03em;color:rgba(255,255,255,.55);
+  margin:0 0 32px;
+}
+.hero-trust svg{width:14px;height:14px;color:var(--gold-soft);flex:none;}
+.hero-stats{display:flex;gap:14px;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(255,255,255,.15);}
+.hero-stats div{
+  display:flex;flex-direction:column;gap:4px;
+  padding:16px 22px;border-radius:var(--radius-md);
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  transition:transform .3s ease, border-color .3s ease, background .3s ease;
+  animation:statPop .65s cubic-bezier(.34,1.56,.64,1) backwards;
+}
+.hero-stats div:nth-child(1){animation-delay:.15s;}
+.hero-stats div:nth-child(2){animation-delay:.28s;}
+.hero-stats div:nth-child(3){animation-delay:.41s;}
+.hero-stats div:nth-child(4){animation-delay:.54s;}
+@keyframes statPop{
+  from{opacity:0;transform:translateY(16px) scale(.9);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+.hero-stats div:hover{transform:translateY(-3px);border-color:rgba(240,210,140,.5);background:rgba(255,255,255,.09);}
+.hero-stats dt{font-family:var(--font-display);font-size:28px;color:var(--gold-soft);font-weight:500;}
+.hero-stats dd{margin:0;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+
+/* hero portrait — Erica's photo, framed like a showroom display piece */
+.hero-portrait{position:relative;justify-self:center;width:100%;max-width:380px;}
+.hero-portrait-frame{
+  position:relative;
+  width:100%;aspect-ratio:3/4;
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 50px 90px -35px rgba(0,0,0,.65), 0 0 0 1px rgba(201,165,103,.18);
+}
+.hero-portrait-frame img{width:100%;height:100%;object-fit:cover;display:block;}
+.hero-portrait-frame::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(200deg, transparent 55%, rgba(5,12,24,.55) 100%);
+  pointer-events:none;
+}
+.hero-portrait-glow{
+  position:absolute;inset:-30px;z-index:-1;border-radius:calc(var(--radius-lg) + 20px);
+  background:radial-gradient(circle at 30% 20%, rgba(240,210,140,.22), transparent 65%);
+  pointer-events:none;
+}
+
+/* Hero Portrait Badge: Styled to be highly legible in both light and dark modes */
+.hero-portrait-badge{
+  position:absolute;left:50%;bottom:-16px;
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--glass-bg-strong);border:1px solid var(--gold);
+  /* Default to a premium dark navy color in light mode for excellent contrast against light-colored glass background */
+  color:var(--navy);
+  font-size:12px;font-weight:600;letter-spacing:.05em;
+  padding:11px 22px;border-radius:999px;white-space:nowrap;
+  -webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%);
+  box-shadow:0 18px 34px -16px rgba(0,0,0,.55);
+  animation:badgeFloat 3.6s ease-in-out infinite;
+}
+/* Shift color dynamically to golden-soft in dark mode to stay legible against dark navy glass background */
+html[data-theme="dark"] .hero-portrait-badge {
+  color:var(--gold-soft);
+}
+
+@keyframes badgeFloat{
+  0%,100%{transform:translateX(-50%) translateY(0);}
+  50%{transform:translateX(-50%) translateY(-7px);}
+}
+.hero-portrait-badge svg{width:14px;height:14px;flex:none;}
+
+.hero-skyline{
+  position:absolute;left:0;right:0;bottom:0;height:34vh;min-height:220px;
+  z-index:1;pointer-events:none;
+}
+.hero-skyline svg{width:100%;height:100%;display:block;}
+.skyline-glow circle{animation:twinkle 4.5s ease-in-out infinite;}
+@keyframes twinkle{
+  0%,100%{opacity:.25;}
+  50%{opacity:.95;}
+}
+
+/* ambient drifting gold particles — reinforces the showroom-light mood */
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+.hero-particles span{
+  position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;
+  background:var(--gold-soft);opacity:0;
+  box-shadow:0 0 8px 2px rgba(240,210,140,.55);
+  animation:particleDrift linear infinite;
+}
+@keyframes particleDrift{
+  0%{transform:translate(0,0);opacity:0;}
+  12%{opacity:.85;}
+  85%{opacity:.4;}
+  100%{transform:translate(var(--drift-x,20px),-420px);opacity:0;}
+}
+@media (max-width:960px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-portrait{order:-1;max-width:260px;margin:0 auto 20px;}
+  .hero-portrait-badge{font-size:11px;padding:9px 18px;}
+}
+
+/* ============================================================
+   3. ABOUT
+   ============================================================ */
+.about-grid{
+  display:grid;grid-template-columns:.85fr 1.15fr;gap:70px;align-items:start;
+}
+.about-card{
+  background:var(--glass-bg-strong);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  padding:40px 34px;
+  box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  position:sticky; top:120px;
+  transition:box-shadow .35s ease, transform .35s ease;
+}
+.about-card:hover{box-shadow:var(--glass-shadow), 0 0 0 1px rgba(201,165,103,.25);}
+.about-avatar{
+  width:84px;height:84px;border-radius:50%;
+  background:var(--navy);color:var(--gold-soft);
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--gold);margin-bottom:20px;
+  overflow:hidden;
+  box-shadow:0 16px 28px -22px rgba(0,0,0,.55);
+}
+.about-avatar img{width:100%;height:100%;object-fit:cover;}
+.about-card h3{font-size:21px;margin-bottom:2px;}
+.about-card .role{font-size:13px;color:var(--gold);font-weight:600;letter-spacing:.03em;margin-bottom:22px;display:block;}
+.why-list{display:flex;flex-direction:column;gap:14px;margin-top:6px;}
+.why-list li{display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--text);}
+.why-list svg{width:18px;height:18px;flex:none;color:var(--gold);margin-top:2px;}
+.about-copy p{font-size:16px;color:var(--text-muted);}
+.about-copy .tagline{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-size:22px;
+  color:var(--text);
+  border-left:2px solid var(--gold);
+  padding-left:20px;
+  margin:30px 0;
+}
+@media (max-width:860px){
+  .about-grid{grid-template-columns:1fr;}
+  .about-card{position:static;}
+}
+
+/* ============================================================
+   4. GALLERY (property showcase)
+   ============================================================ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:220px;
+  gap:16px;
+}
+.gallery-item{
+  position:relative;border-radius:var(--radius-md);overflow:hidden;
+  cursor:pointer;border:1px solid var(--glass-border);
+  background:var(--surface);
+}
+.gallery-item.tall{grid-row:span 2;}
+.gallery-item.wide{grid-column:span 2;}
+.gallery-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s ease;
+}
+.gallery-item:hover img{transform:scale(1.07) rotate(-1deg);}
+.gallery-item-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(0deg, rgba(5,12,24,.82) 0%, rgba(5,12,24,.05) 55%, transparent 100%);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:18px;opacity:0;transition:opacity .3s ease;
+}
+.gallery-item:hover .gallery-item-overlay{opacity:1;}
+.gallery-item-tag{
+  align-self:flex-start;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--navy-deep);background:var(--gold-soft);padding:4px 10px;border-radius:999px;margin-bottom:10px;
+}
+.gallery-item-title{color:#fff;font-family:var(--font-display);font-size:16.5px;font-weight:500;}
+.gallery-item-loc{color:rgba(255,255,255,.7);font-size:12px;margin-top:2px;}
+@media (max-width:960px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px;}
+  .gallery-item.wide{grid-column:span 2;}
+}
+@media (max-width:560px){
+  .gallery-grid{grid-template-columns:1fr;grid-auto-rows:220px;}
+  .gallery-item.tall{grid-row:span 1;}
+  .gallery-item.wide{grid-column:span 1;}
+}
+
+/* gallery / project image lightbox modal */
+.lb-img-wrap{
+  margin:-40px -40px 22px;border-radius:var(--radius-lg) var(--radius-lg) 0 0;overflow:hidden;
+  aspect-ratio:4/3;background:var(--navy);
+}
+.lb-img-wrap img{width:100%;height:100%;object-fit:cover;}
+@media (max-width:520px){
+  .lb-img-wrap{margin:-32px -20px 20px;}
+}
+
+/* ============================================================
+   4b. PROJECTS
+   ============================================================ */
+.filter-tabs{
+  display:flex;flex-wrap:wrap;gap:6px;margin-bottom:44px;
+  padding:6px;border-radius:999px;
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  -webkit-backdrop-filter:blur(var(--glass-blur));backdrop-filter:blur(var(--glass-blur));
+  width:fit-content;max-width:100%;
+}
+.filter-tab{
+  padding:9px 18px;border:1px solid transparent;border-radius:999px;
+  background:transparent;color:var(--text-muted);font-size:13.5px;font-weight:500;
+  transition:all .2s ease;
+}
+.filter-tab:hover{color:var(--text);}
+.filter-tab.active{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 8px 18px -10px rgba(10,27,50,.6);}
+html[data-theme="dark"] .filter-tab.active{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);}
+
+.project-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;
+}
+/* display vitrine — glass card with a museum frame-light top edge and a
+   cursor-tracked spotlight, per the showroom concept */
+.project-card{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:var(--glass-bg-strong);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-md);
+  transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  display:flex;flex-direction:column;
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  --mx:50%; --my:0%;
+}
+.project-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;z-index:2;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity:.55; transition:opacity .35s ease;
+}
+.project-card::after{
+  content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(360px circle at var(--mx) var(--my), var(--spot-gold), transparent 60%);
+  opacity:0; transition:opacity .4s ease;
+}
+.project-card:hover{transform:translateY(-6px);box-shadow:var(--glass-shadow);border-color:rgba(201,165,103,.45);}
+.project-card:hover::before{opacity:1;}
+.project-card:hover::after{opacity:.35;}
+.project-card-media{
+  position:relative;width:100%;aspect-ratio:4/3;overflow:hidden;flex:none;
+}
+.project-card-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+.project-card:hover .project-card-media img{transform:scale(1.06);}
+.project-card-media .badge{position:absolute;top:14px;right:14px;margin:0;}
+.project-card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex:1;}
+.project-tag{
+  font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:10px;
+}
+.project-card h4{font-size:20px;margin-bottom:14px;}
+.project-specs{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;flex:1;}
+.project-specs span{font-size:13.5px;color:var(--text-muted);display:flex;gap:8px;align-items:center;}
+.project-specs svg{width:14px;height:14px;color:var(--gold);flex:none;}
+.badge{
+  align-self:flex-start;
+  font-size:11px;font-weight:600;letter-spacing:.05em;
+  background:linear-gradient(135deg, rgba(201,165,103,.16), rgba(201,165,103,.05));
+  color:var(--gold);
+  border:1px solid rgba(201,165,103,.35);
+  padding:5px 12px;border-radius:999px;margin-bottom:18px;
+}
+.project-card-media .badge{
+  background:rgba(5,12,24,.55);color:var(--gold-soft);border-color:rgba(255,255,255,.25);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.project-actions{display:flex;gap:10px;margin-top:auto;}
+
+/* ============================================================
+   4c. VIDEO TOURS
+   ============================================================ */
+.reel-wall{
+  display:flex;gap:22px;overflow-x:auto;padding:6px 6px 22px;scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+}
+.reel-wall::-webkit-scrollbar{height:8px;}
+.reel-wall::-webkit-scrollbar-thumb{background:var(--border);border-radius:999px;}
+.reel-frame{
+  flex:none;scroll-snap-align:start;width:230px;
+}
+.reel-video-wrap{
+  position:relative;width:100%;aspect-ratio:9/16;border-radius:var(--radius-md);overflow:hidden;
+  background:var(--navy-deep);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--glass-shadow);
+}
+.reel-video-wrap video{width:100%;height:100%;object-fit:cover;display:block;}
+.reel-video-wrap .reel-label{
+  position:absolute;top:12px;left:12px;
+  display:flex;align-items:center;gap:6px;
+  font-size:11px;font-weight:600;letter-spacing:.04em;color:#fff;
+  background:rgba(5,12,24,.55);border:1px solid rgba(255,255,255,.2);
+  padding:5px 11px;border-radius:999px;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  pointer-events:none;
+}
+.reel-video-wrap .reel-label svg{width:11px;height:11px;color:var(--gold-soft);}
+.reel-fallback{
+  display:block;text-align:center;margin-top:12px;font-size:12.5px;color:var(--gold);font-weight:600;
+}
+.reel-fallback:hover{color:var(--gold-bright);}
+.reel-hint{text-align:center;font-size:12.5px;color:var(--text-muted);margin:-4px 0 0;}
+@media (max-width:640px){
+  .reel-frame{width:190px;}
+}
+
+/* ============================================================
+   5. LOCATIONS COVERED
+   ============================================================ */
+.locations-banner{
+  position:relative;border-radius:var(--radius-lg);overflow:hidden;margin-bottom:44px;
+  aspect-ratio:21/8;border:1px solid var(--glass-border);
+}
+.locations-banner img{width:100%;height:100%;object-fit:cover;display:block;}
+.locations-banner-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(5,12,24,.82) 0%, rgba(5,12,24,.35) 55%, transparent 100%);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 44px;
+}
+.locations-banner-overlay .eyebrow{color:var(--gold-soft);margin-bottom:10px;}
+.locations-banner-overlay .eyebrow::before{background:var(--gold-soft);}
+.locations-banner-overlay h3{color:#fff;font-size:clamp(20px,2.6vw,30px);max-width:480px;margin:0;}
+@media (max-width:760px){
+  .locations-banner{aspect-ratio:4/5;}
+  .locations-banner-overlay{padding:0 26px;}
+}
+.locations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px;}
+.location-card{
+  border:1px solid var(--glass-border);border-radius:var(--radius-md);padding:26px;
+  background:var(--glass-bg);
+  -webkit-backdrop-filter:blur(var(--glass-blur));backdrop-filter:blur(var(--glass-blur));
+  transition:border-color .3s ease, transform .3s ease;
+}
+.location-card:hover{border-color:rgba(201,165,103,.4);transform:translateY(-3px);}
+.location-card h4{font-size:16.5px;margin-bottom:4px;}
+.location-card .loc-sub{font-size:12.5px;color:var(--gold);font-weight:600;letter-spacing:.03em;margin-bottom:14px;display:block;}
+.location-card ul{display:flex;flex-direction:column;gap:6px;}
+.location-card li{font-size:13.5px;color:var(--text-muted);position:relative;padding-left:14px;}
+.location-card li::before{content:'';position:absolute;left:0;top:9px;width:5px;height:1px;background:var(--gold);}
+
+/* ============================================================
+   6. PROMOS
+   ============================================================ */
+.promo-band{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+  border:1px solid rgba(201,165,103,.25);
+  border-radius:var(--radius-lg);
+  padding:56px;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+  color:#fff;
+}
+.promo-band::before{
+  content:'';position:absolute;top:0;bottom:0;width:38%;
+  background:linear-gradient(100deg, transparent, rgba(240,210,140,.10), transparent);
+  animation:shimmerSweep 7s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes shimmerSweep{
+  0%{transform:translateX(-120%);}
+  55%,100%{transform:translateX(320%);}
+}
+.promo-band h2{color:#fff;font-size:clamp(24px,3vw,34px);}
+.promo-band p{color:rgba(255,255,255,.7);}
+.promo-checks{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 30px;margin:20px 0 0;}
+.promo-checks li{display:flex;gap:10px;align-items:center;font-size:14.5px;color:#fff;}
+.promo-checks svg{width:16px;height:16px;color:var(--gold-soft);flex:none;}
+.promo-note{font-size:12.5px;color:rgba(255,255,255,.5);margin-top:18px;}
+@media (max-width:760px){
+  .promo-band{grid-template-columns:1fr;padding:36px 26px;}
+  .promo-checks{grid-template-columns:1fr;}
+}
+
+/* ============================================================
+   7. WHY INVEST
+   ============================================================ */
+.invest-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1px;background:var(--glass-border);border:1px solid var(--glass-border);border-radius:var(--radius-md);overflow:hidden;}
+.invest-item{
+  background:var(--glass-bg-strong);padding:34px 30px;display:flex;gap:18px;align-items:flex-start;
+  transition:background .3s ease;
+}
+.invest-item:hover{background:var(--surface);}
+.invest-item svg{width:26px;height:26px;color:var(--gold);flex:none;margin-top:2px;filter:drop-shadow(0 0 10px rgba(201,165,103,.35));transition:transform .35s cubic-bezier(.34,1.56,.64,1);}
+.invest-item:hover svg{transform:scale(1.15) rotate(-6deg);}
+.invest-item h4{font-size:16px;margin-bottom:6px;}
+.invest-item p{font-size:14px;margin:0;}
+
+/* ============================================================
+   8. TESTIMONIALS
+   ============================================================ */
+.testimonial-wrap{
+  position:relative;max-width:760px;margin:0 auto;text-align:center;
+  padding:56px 48px;border-radius:var(--radius-lg);
+  background:var(--glass-bg-strong);border:1px solid var(--glass-border);
+  box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+}
+.testimonial-wrap::before{
+  content:'\201C';position:absolute;top:6px;left:32px;
+  font-family:var(--font-display);font-size:110px;line-height:1;
+  color:var(--gold);opacity:.18;pointer-events:none;
+}
+.testimonial-slide{display:none;}
+.testimonial-slide.active{display:block;animation:testimonialIn .6s cubic-bezier(.22,1,.36,1);}
+@keyframes testimonialIn{from{opacity:0;transform:translateX(26px);}to{opacity:1;transform:translateX(0);}}
+.stars{color:var(--gold);font-size:18px;letter-spacing:3px;margin-bottom:20px;}
+.testimonial-slide blockquote{
+  font-family:var(--font-display);font-size:clamp(19px,2.4vw,25px);font-style:italic;
+  color:var(--text);margin:0 0 22px;line-height:1.5;
+  position:relative;
+}
+.testimonial-slide cite{font-size:13.5px;color:var(--gold);font-weight:600;letter-spacing:.03em;font-style:normal;}
+.testimonial-dots{display:flex;justify-content:center;gap:10px;margin-top:36px;}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:none;padding:0;transition:background .25s ease, transform .25s ease;}
+.dot.active{background:var(--gold);transform:scale(1.3);}
+
+/* ============================================================
+   9. INVESTMENT GUIDE
+   ============================================================ */
+.guide-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.guide-list{display:flex;flex-direction:column;gap:16px;}
+.guide-list li{display:flex;gap:14px;align-items:center;font-size:15.5px;padding:14px 0;border-bottom:1px solid var(--border);}
+.guide-list li:last-child{border-bottom:none;}
+.guide-list svg{width:18px;height:18px;color:var(--gold);flex:none;}
+@media (max-width:860px){/********** STREAMING_CHUNK:Styling responsive utilities... **********/.guide-wrap{grid-template-columns:1fr;gap:34px;}}
+
+/* ============================================================
+   10. FAQ
+   ============================================================ */
+.faq-list{max-width:820px;margin:0 auto;}
+.faq-item{border-bottom:1px solid var(--border);border-radius:var(--radius-sm);transition:background .3s ease;}
+.faq-item[open]{background:var(--glass-bg);}
+.faq-item summary{
+  list-style:none;cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:24px 16px;font-size:16.5px;font-weight:500;color:var(--text);
+  font-family:var(--font-display);
+}
+.faq-item summary::-webkit-details-marker{display:none;}
+.faq-item .chev{width:18px;height:18px;color:var(--gold);flex:none;transition:transform .25s ease;}
+.faq-item[open] .chev{transform:rotate(45deg);}
+.faq-item .faq-a{padding:0 16px 26px;color:var(--text-muted);font-size:15px;max-width:680px;}
+.faq-item .faq-a ul{margin-top:8px;display:flex;flex-direction:column;gap:4px;}
+.faq-item .faq-a li{padding-left:14px;position:relative;}
+.faq-item .faq-a li::before{content:'';position:absolute;left:0;top:10px;width:5px;height:1px;background:var(--gold);}
+
+/* ============================================================
+   11. CONTACT
+   ============================================================ */
+.contact-wrap{
+  display:grid;grid-template-columns:1.1fr .9fr;gap:60px;
+}
+.contact-info-card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
+  color:#fff;border-radius:var(--radius-lg);padding:44px;
+  border:1px solid rgba(201,165,103,.25);
+}
+.contact-info-card::before{
+  content:'';position:absolute;width:380px;height:380px;top:-160px;right:-120px;border-radius:50%;
+  background:radial-gradient(circle, rgba(240,210,140,.16), transparent 70%);
+  pointer-events:none;
+}
+.contact-info-card h3{color:#fff;font-size:24px;}
+.contact-info-card p{color:rgba(255,255,255,.65);}
+.contact-rows{display:flex;flex-direction:column;gap:20px;margin-top:24px;}
+.contact-row{display:flex;gap:14px;align-items:flex-start;}
+.contact-row .ic{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;flex:none;}
+.contact-row .ic svg{width:17px;height:17px;color:var(--gold-soft);}
+.contact-row a, .contact-row span{font-size:14.5px;color:#fff;}
+.contact-row small{display:block;font-size:11.5px;color:rgba(255,255,255,.5);letter-spacing:.04em;text-transform:uppercase;margin-bottom:3px;}
+.social-row{display:flex;gap:10px;margin-top:28px;flex-wrap:wrap;}
+.social-row a{
+  width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;transition:border-color .2s ease, background .2s ease;
+}
+.social-row a:hover{border-color:var(--gold);background:rgba(255,255,255,.06);}
+.social-row svg{width:17px;height:17px;color:#fff;}
+.contact-cta-card{
+  border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:44px;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  background:var(--glass-bg-strong);
+  box-shadow:var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter:blur(var(--glass-blur)) saturate(140%);
+}
+.contact-cta-card h3{font-size:24px;}
+@media (max-width:860px){.contact-wrap{grid-template-columns:1fr;}}
+
+/* ============================================================
+   12. FOOTER
+   ============================================================ */
+.site-footer{background:var(--navy-deep);color:rgba(255,255,255,.65);position:relative;overflow:hidden;}
+.footer-skyline{position:absolute;top:0;left:0;right:0;height:60px;opacity:.4;pointer-events:none;}
+.footer-skyline svg{width:100%;height:100%;}
+.footer-inner{max-width:var(--maxw);margin:0 auto;padding:90px 28px 40px;position:relative;z-index:1;}
+.footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,.1);}
+.footer-brand h4{color:#fff;font-size:19px;}
+.footer-logo{
+  width:52px;height:52px;border-radius:50%;
+  border:1px solid var(--gold);
+  margin-bottom:16px;
+  overflow:hidden;
+}
+.footer-logo img{width:100%;height:100%;object-fit:cover;}
+.footer-grid h5{color:#fff;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px;}
+.footer-grid ul{display:flex;flex-direction:column;gap:10px;}
+.footer-grid a{font-size:14px;color:rgba(255,255,255,.65);}
+.footer-grid a:hover{color:var(--gold-soft);}
+.footer-bottom{padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:rgba(255,255,255,.4);}
+@media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.footer-grid{grid-template-columns:1fr;}}
+
+/* ============================================================
+   13. FLOATING SCHEDULE CTA (custom — replaces Calendly's default badge)
+   ============================================================ */
+.floating-cta{
+  position:fixed;right:24px;bottom:24px;z-index:520;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:16px 24px;border-radius:999px;border:none;
+  background:linear-gradient(135deg, var(--gold-bright), var(--gold));
+  color:var(--navy-deep);font-family:var(--font-body);font-weight:700;font-size:14px;letter-spacing:.02em;
+  box-shadow:0 16px 34px -14px rgba(0,0,0,.45), 0 0 0 1px rgba(255,255,255,.3) inset;
+  cursor:pointer;
+  opacity:1;
+  transition:transform .25s ease, box-shadow .25s ease, opacity .3s ease;
+  animation:ctaPulse 3.4s ease-in-out infinite, ctaSlideIn .5s ease .3s backwards;
+}
+.floating-cta:hover{transform:translateY(-3px);box-shadow:0 22px 40px -16px rgba(0,0,0,.55);}
+.floating-cta svg{width:17px;height:17px;flex:none;}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 16px 34px -14px rgba(0,0,0,.45), 0 0 0 0 rgba(201,165,103,.4);}
+  50%{box-shadow:0 16px 34px -14px rgba(0,0,0,.45), 0 0 0 9px rgba(201,165,103,0);}
+}
+@keyframes ctaSlideIn{from{transform:translateY(16px);}to{transform:translateY(0);}}
+
+/* ============================================================
+   13b. FLOATING MUSIC TOGGLE (background audio play / pause)
+   ============================================================ */
+.floating-music-btn{
+  position:fixed;left:24px;bottom:24px;z-index:520;
+  width:52px;height:52px;border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.35);
+  background:rgba(10,27,50,.6);
+  color:#fff;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  box-shadow:0 16px 34px -14px rgba(0,0,0,.45);
+  cursor:pointer;
+  transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+}
+.floating-music-btn:hover{transform:translateY(-3px);background:rgba(10,27,50,.75);box-shadow:0 22px 40px -16px rgba(0,0,0,.55);}
+.floating-music-btn svg{width:19px;height:19px;}
+.floating-music-btn.playing{border-color:var(--gold);color:var(--gold-soft);}
+.floating-music-btn.playing svg{animation:musicPulse 1.8s ease-in-out infinite;}
+@keyframes musicPulse{
+  0%,100%{opacity:1;}
+  50%{opacity:.6;}
+}
+
+/* ============================================================
+   14. MODALS
+   ============================================================ */
+.modal-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--scrim);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  opacity:0;pointer-events:none;
+  transition:opacity .3s ease;
+}
+.modal-overlay.open{opacity:1;pointer-events:auto;}
+.modal-box{
+  background:var(--glass-bg-strong);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  max-width:560px;width:100%;
+  max-height:88vh;overflow-y:auto;
+  padding:40px;
+  position:relative;
+  transform:translateY(20px) scale(.98);
+  transition:transform .3s ease;
+  box-shadow:0 40px 80px -30px rgba(0,0,0,.5);
+  -webkit-backdrop-filter:blur(28px) saturate(160%);
+  backdrop-filter:blur(28px) saturate(160%);
+}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+.modal-close{
+  position:absolute;top:18px;right:18px;
+  width:34px;height:34px;border-radius:50%;border:1px solid var(--border);
+  background:transparent;display:flex;align-items:center;justify-content:center;color:var(--text-muted);
+  z-index:3;
+}
+.modal-close:hover{border-color:var(--gold);color:var(--gold);}
+.modal-close svg{width:16px;height:16px;}
+.modal-eyebrow{color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;display:block;}
+.modal-box h3{font-size:23px;margin-bottom:6px;}
+.modal-box .modal-sub{font-size:14.5px;color:var(--text-muted);margin-bottom:26px;}
+
+/* project detail modal */
+.pm-tag{font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);}
+.pm-specs{display:flex;flex-direction:column;gap:10px;margin:20px 0 26px;}
+.pm-specs div{display:flex;justify-content:space-between;font-size:14.5px;border-bottom:1px solid var(--border);padding-bottom:10px;}
+.pm-specs span:first-child{color:var(--text-muted);}
+.pm-specs span:last-child{font-weight:600;}
+
+/* promo modal */
+.promo-modal .modal-box{max-width:480px;text-align:center;}
+.promo-modal h3{font-size:26px;}
+.promo-modal .promo-list{display:flex;flex-direction:column;gap:10px;text-align:left;margin:22px 0 28px;}
+.promo-modal .promo-list li{display:flex;gap:10px;align-items:center;font-size:14.5px;}
+.promo-modal .promo-list svg{width:16px;height:16px;color:var(--gold);flex:none;}
+
+@media (max-width:520px){
+  .form-grid{grid-template-columns:1fr;}
+  .field.full{grid-column:auto;}
+  .modal-box{padding:30px 22px;}
+}
+
+@media (max-width:640px){
+  /********** STREAMING_CHUNK:Applying mobile media queries... **********/
+  .container,
+  .nav-inner,
+  .hero-inner,
+  .footer-inner{
+    padding-left:20px;
+    padding-right:20px;
+  }
+  .section{padding:72px 0;}
+  .section-head{margin-bottom:34px;}
+  .section-head p{font-size:15.5px;}
+  .eyebrow{
+    gap:8px;
+    font-size:11px;
+    letter-spacing:.12em;
+  }
+  .eyebrow::before{width:18px;}
+
+  .brand{min-width:0;gap:10px;}
+  .brand-mark{width:38px;height:38px;font-size:14px;}
+  .brand-text{min-width:0;}
+  .brand-text strong{font-size:15.5px;}
+  .brand-text small{
+    font-size:10px;
+    max-width:170px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .nav-inner{gap:12px;}
+  .nav-actions{gap:8px;}
+
+  .hero{
+    min-height:auto;
+    padding:112px 0 140px;
+    align-items:flex-start;
+  }
+  .hero h1{font-size:clamp(34px,10vw,44px);}
+  .hero-sub{font-size:15.5px;}
+  .hero-cta{
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+    margin:28px 0 40px;
+  }
+  .hero-cta .btn{width:100%;white-space:normal;}
+  .hero-stats{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:18px;
+    padding-top:24px;
+  }
+  .hero-stats dt{font-size:24px;}
+  .hero-skyline{height:170px;min-height:170px;}
+
+  .about-card,
+  .contact-info-card,
+  .contact-cta-card{
+    padding:28px 22px;
+    border-radius:var(--radius-md);
+  }
+  .about-copy .tagline{
+    font-size:19px;
+    padding-left:16px;
+  }
+
+  .filter-tabs{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    padding-bottom:8px;
+    margin-left:0;
+    margin-right:0;
+    padding-left:0;
+    padding-right:0;
+    scrollbar-width:none;
+  }
+  .filter-tabs::-webkit-scrollbar{display:none;}
+  .filter-tab{flex:0 0 auto;}
+  .project-grid,
+  .locations-grid,
+  .invest-grid{
+    grid-template-columns:1fr;
+  }
+  .project-card,
+  .location-card,
+  .invest-item{
+    padding:0;
+  }
+  .project-card-body{padding:20px 18px 20px;}
+  .invest-item{padding:24px 20px;}
+  .location-card{padding:24px 20px;}
+  .project-actions{
+    flex-direction:column;
+  }
+  .project-actions .btn{width:100%;}
+
+  .promo-band{
+    margin-left:0;
+    margin-right:0;
+    border-radius:var(--radius-md);
+    padding:38px 20px;
+  }
+  .promo-band .btn{width:100%;white-space:normal;}
+
+  .testimonial-wrap{padding:40px 24px;}
+  .testimonial-wrap::before{font-size:80px;left:16px;}
+  .guide-wrap{gap:28px;}
+  .guide-wrap .btn,
+  .contact-cta-card .btn{
+    width:100%;
+    white-space:normal;
+  }
+  .guide-list li{
+    align-items:flex-start;
+    font-size:14.5px;
+  }
+  .faq-item summary{
+    align-items:flex-start;
+    gap:14px;
+    padding:20px 0;
+    font-size:15.5px;
+  }
+  .faq-item .faq-a{padding-left:0;padding-right:0;font-size:14.5px;}
+
+  .contact-wrap{gap:24px;}
+  .contact-row{
+    gap:12px;
+    min-width:0;
+  }
+  .contact-row div{min-width:0;}
+  .contact-row a,
+  .contact-row span{
+    overflow-wrap:anywhere;
+  }
+  .footer-inner{padding-top:72px;}
+  .footer-grid{gap:28px;padding-bottom:34px;}
+  .footer-bottom{flex-direction:column;}
+
+  .floating-cta{
+    left:16px;
+    right:16px;
+    bottom:16px;
+    width:auto;
+    justify-content:center;
+  }
+  .floating-music-btn{
+    left:16px;
+    bottom:84px;
+    width:46px;height:46px;
+  }
+  .floating-music-btn svg{width:17px;height:17px;}
+
+  .modal-overlay{
+    align-items:flex-end;
+    padding:12px;
+  }
+  .modal-box{
+    max-height:calc(100vh - 24px);
+    border-radius:12px;
+    padding:32px 20px 22px;
+  }
+  .pm-specs div{
+    flex-direction:column;
+    gap:2px;
+  }
+}
+
+@media (max-width:380px){
+  .container,
+  .nav-inner,
+  .hero-inner,
+  .footer-inner{
+    padding-left:16px;
+    padding-right:16px;
+  }
+  .brand-text small{max-width:130px;}
+  .btn{padding-left:18px;padding-right:18px;}
+  .hero{padding-top:104px;}
+  .project-card-body,
+  .location-card,
+  .invest-item,
+  .about-card,
+  .contact-info-card,
+  .contact-cta-card{
+    padding-left:18px;
+    padding-right:18px;
+  }
+}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal.in .eyebrow::before{animation:eyebrowDraw .7s ease .15s backwards;}
+@keyframes eyebrowDraw{from{width:0;}to{width:26px;}}
+
+/* staggered grid entrance — children fade/rise in one after another */
+.stagger-grid > *{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s ease;}
+.stagger-grid.in > *{opacity:1;transform:translateY(0);}
+.stagger-grid.in > *:nth-child(1){transition-delay:.03s;}
+.stagger-grid.in > *:nth-child(2){transition-delay:.09s;}
+.stagger-grid.in > *:nth-child(3){transition-delay:.15s;}
+.stagger-grid.in > *:nth-child(4){transition-delay:.21s;}
+.stagger-grid.in > *:nth-child(5){transition-delay:.27s;}
+.stagger-grid.in > *:nth-child(6){transition-delay:.33s;}
+.stagger-grid.in > *:nth-child(7){transition-delay:.39s;}
+.stagger-grid.in > *:nth-child(8){transition-delay:.45s;}
+.stagger-grid.in > *:nth-child(9){transition-delay:.51s;}
+.stagger-grid.in > *:nth-child(10){transition-delay:.57s;}
+.stagger-grid.in > *:nth-child(11){transition-delay:.63s;}
+.stagger-grid.in > *:nth-child(12){transition-delay:.69s;}
+</style>
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
-<header class="site-header" id="siteHeader">
-  <div class="wrap header-inner">
-    <a href="#about" class="brand">
-      <img src="logo.png" alt="Erica Bolante Logo" class="brand-logo" width="44" height="44">
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="site-header" id="site-header">
+  <div class="nav-inner">
+    <a href="#hero" class="brand">
+      <span class="brand-mark"><img src="logo.png" alt="" width="44" height="44"></span>
       <span class="brand-text">
-        <span class="brand-name">Erica Bolante</span>
-        <span class="brand-tag">Megaworld Property Specialist</span>
+        <strong>Erica Cristal</strong>
+        <small>Megaworld RFO Premier Realtor</small>
       </span>
     </a>
-
-    <nav class="main-nav" id="mainNav" aria-label="Primary">
-      <a href="#gallery">Gallery</a>
-      <a href="#residences">Residences</a>
-      <a href="#tours">Video Tours</a>
-      <a href="#about">About Erica</a>
-      <a href="#testimonials">Clients</a>
-      <a href="#contact">Contact</a>
+    <nav class="nav-links" id="nav-links">
+      <a href="#about" class="nav-link-item">About</a>
+      <a href="#gallery" class="nav-link-item">Gallery</a>
+      <a href="#projects" class="nav-link-item">Projects</a>
+      <a href="#tours" class="nav-link-item">Tours</a>
+      <a href="#promos" class="nav-link-item">Promos</a>
+      <a href="#invest" class="nav-link-item">Invest</a>
+      <a href="#testimonials" class="nav-link-item">Testimonials</a>
+      <a href="#faq" class="nav-link-item">FAQ</a>
+      <a href="#contact" class="nav-link-item">Contact</a>
     </nav>
-
-    <div class="header-actions">
-      <!-- Dark/Light Mode Toggle -->
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle Theme">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"/>
-          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-        </svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
-        </svg>
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.4 19.6L6 18M18 6l1.6-1.6"/></svg>
       </button>
-      
-      <a href="#contact" class="btn btn-primary nav-cta">Book a Consultation</a>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mainNav">
-        <span></span><span></span><span></span>
+      <button class="btn btn-gold btn-sm" data-calendly>Schedule a Viewing</button>
+      <button class="nav-burger" id="nav-burger" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
 </header>
 
-<main>
-
-  <!-- ============ HERO / ABOUT ERICA ============ -->
-  <section class="hero" id="about">
-    <div class="wrap hero-inner about-hero-inner">
-      <div class="about-hero-grid">
-        <div class="about-portrait reveal">
-          <div class="portrait-wrapper">
-            <div class="portrait-card">
-              <img src="profile.jpg" alt="Erica Cristal Bolante — Megaworld Property Specialist" loading="eager">
-            </div>
-            <span class="portrait-badge">Megaworld Accredited</span>
-          </div>
-          <div class="portrait-caption">
-            <strong>Erica Cristal Bolante</strong>
-            <span class="caption-sub">Property Specialist, Megaworld Corporation</span>
-          </div>
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="hero">
+  <div class="hero-particles" aria-hidden="true">
+    <span style="left:6%;--drift-x:14px;animation-duration:9s;animation-delay:0s;"></span>
+    <span style="left:16%;--drift-x:-10px;animation-duration:11s;animation-delay:1.2s;"></span>
+    <span style="left:27%;--drift-x:18px;animation-duration:8s;animation-delay:2.4s;"></span>
+    <span style="left:39%;--drift-x:-16px;animation-duration:12s;animation-delay:.6s;"></span>
+    <span style="left:52%;--drift-x:10px;animation-duration:10s;animation-delay:3.1s;"></span>
+    <span style="left:64%;--drift-x:-12px;animation-duration:9.5s;animation-delay:1.8s;"></span>
+    <span style="left:75%;--drift-x:16px;animation-duration:11.5s;animation-delay:4s;"></span>
+    <span style="left:85%;--drift-x:-8px;animation-duration:8.5s;animation-delay:2.9s;"></span>
+    <span style="left:93%;--drift-x:12px;animation-duration:10.5s;animation-delay:.9s;"></span>
+    <span style="left:47%;--drift-x:-14px;animation-duration:13s;animation-delay:3.7s;"></span>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">Your Realtor in the Metro</p>
+        <h1>Find Your Dream <em>Ready-for-Occupancy</em> Home with Megaworld</h1>
+        <p class="hero-sub">Finding the right property, building your future. I help families, professionals, OFWs, and investors discover premium RFO condominiums across Megaworld's most prestigious townships — from first inquiry to move-in day.</p>
+        <div class="hero-cta">
+          <button class="btn btn-gold" data-calendly>Schedule a Free Property Viewing</button>
+          <a href="#projects" class="btn btn-glass">Browse Available RFO Units</a>
         </div>
-
-        <div class="about-copy reveal">
-          <p class="eyebrow">Megaworld Property Specialist</p>
-          <h1 class="hero-title">
-            Your trusted guide to Metro Manila's <em>finest homes.</em>
-          </h1>
-          <p class="hero-sub">
-            Erica Cristal Bolante helps families, professionals, and OFW investors secure the perfect unit inside Metro Manila's premier Megaworld townships — with patience, transparency, and genuine care every step of the way.
-          </p>
-          <p class="hero-sub">
-            From reserving your first studio in BGC to comparing pre-selling terms in Cavite or Bulacan — Erica handles the paperwork, site visits, and follow-through so you don't have to.
-          </p>
-          <ul class="about-list about-list-hero">
-            <li>Pre-selling &amp; Ready-for-Occupancy specialist</li>
-            <li>Serving Metro Manila, Cavite, Bulacan &amp; Pampanga</li>
-            <li>Remote assistance for OFW &amp; overseas buyers</li>
-          </ul>
-          <div class="hero-actions">
-            <a href="#gallery" class="btn btn-primary">View Properties</a>
-            <a href="#contact" class="btn btn-secondary">Talk to Erica</a>
-          </div>
-        </div>
+        <p class="hero-trust"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> No pressure, no obligation — just clear, honest guidance.</p>
+        <dl class="hero-stats">
+          <div><dt>9+</dt><dd>Premier Townships</dd></div>
+          <div><dt>₱30K</dt><dd>Starting Reservation</dd></div>
+          <div><dt>3–5%</dt><dd>Move-in Down Payment</dd></div>
+          <div><dt>5★</dt><dd>Client Reviews</dd></div>
+        </dl>
       </div>
-    </div>
-
-    <!-- Stats bar at bottom of hero -->
-    <div class="hero-stats" aria-label="Quick stats">
-      <div class="wrap hero-stats-inner">
-        <div class="stat-item">
-          <span class="stat-num">6+</span>
-          <span class="stat-label">Townships</span>
+      <div class="hero-portrait reveal">
+        <div class="hero-portrait-glow" aria-hidden="true"></div>
+        <div class="hero-portrait-frame">
+          <img src="profile.jpg" alt="Erica Cristal — Megaworld RFO Premier Realtor" loading="eager">
         </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat-item">
-          <span class="stat-num">RFO</span>
-          <span class="stat-label">Ready for Occupancy</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat-item">
-          <span class="stat-num">OFW</span>
-          <span class="stat-label">Remote Assistance</span>
-        </div>
-        <div class="stat-divider" aria-hidden="true"></div>
-        <div class="stat-item">
-          <span class="stat-num">0%</span>
-          <span class="stat-label">Interest Promos</span>
-        </div>
+        <span class="hero-portrait-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.6l-6.1 3-1.4-6.8-5.1-4.7 6.9-.8z"/></svg>
+          Megaworld Accredited
+        </span>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ TRUST RIBBON ============ -->
-  <section class="trust-ribbon">
-    <div class="wrap ribbon-inner">
-      <span class="ribbon-item">Megaworld Accredited Partner</span>
-      <span class="dot" aria-hidden="true">•</span>
-      <span class="ribbon-item">BGC · McKinley West · Northwin · Capital Town · Maple Grove · Eastwood</span>
-      <span class="dot" aria-hidden="true">•</span>
-      <span class="ribbon-item">Site Tours by Appointment</span>
-    </div>
-  </section>
-
-  <!-- ============ PHOTO GALLERY ============ -->
-  <section class="gallery" id="gallery">
-    <div class="wrap">
-      <div class="section-head gallery-section-head reveal">
-        <p class="eyebrow">Property Showcase</p>
-        <h2 class="section-title">A glimpse inside<br><em>your future home</em></h2>
-        <p class="section-sub">Real photos from Erica's listings — click any photo to explore the full details of each property.</p>
-      </div>
-
-      <div class="gallery-grid">
-
-        <div class="gallery-item featured reveal" 
-             data-modal="gallery"
-             data-title="Balcony City View — RFO Unit"
-             data-location="Uptown Bonifacio, BGC, Taguig"
-             data-type="1-Bedroom Condominium"
-             data-size="42 sqm"
-             data-price="₱6.8M – ₱8.5M"
-             data-status="Ready for Occupancy"
-             data-features="Floor-to-ceiling windows, Private balcony with panoramic city view, Fully fitted kitchen, Built-in closets, 1 parking slot available"
-             data-img="Showcase1.jpg">
-          <img src="Showcase1.jpg" alt="Megaworld RFO unit balcony view — Erica Bolante listings" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">RFO Unit</span>
-            <span class="gallery-overlay-text">Balcony City View · Click to explore</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Bedroom with Balcony Access"
-             data-location="McKinley West, Taguig"
-             data-type="1-Bedroom Premium Unit"
-             data-size="38 sqm"
-             data-price="₱7.2M – ₱9.1M"
-             data-status="Pre-selling"
-             data-features="Queen-sized bedroom layout, Glass sliding door to balcony, Natural light east-facing, Premium tile flooring, Smart home ready"
-             data-img="Showcase2.jpg">
-          <img src="Showcase2.jpg" alt="Megaworld unit bedroom with balcony door" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Premium</span>
-            <span class="gallery-overlay-text">Bedroom · Balcony Access</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Modern Kitchen with Wood Accents"
-             data-location="Northwin Global City, Bulacan"
-             data-type="2-Bedroom Unit"
-             data-size="54 sqm"
-             data-price="₱4.9M – ₱6.3M"
-             data-status="Pre-selling"
-             data-features="Full-fitted kitchen with countertop, Custom wood cabinetry, Under-cabinet lighting, Garbage disposal, Stainless steel sink, Pantry space"
-             data-img="Showcase3.jpg">
-          <img src="Showcase3.jpg" alt="Megaworld unit kitchen with wood cabinets" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Modern</span>
-            <span class="gallery-overlay-text">Kitchen · Premium Finish</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Spacious Living Area with Large Windows"
-             data-location="McKinley West, Fort Bonifacio, Taguig"
-             data-type="2-Bedroom Unit"
-             data-size="68 sqm"
-             data-price="₱12.5M – ₱15.2M"
-             data-status="Pre-selling"
-             data-features="Expansive window wall with city views, Open-plan living and dining, High ceilings (2.8m), Natural hardwood flooring option, Garden-facing units available"
-             data-img="Showcase4.jpg">
-          <img src="Showcase4.jpg" alt="Megaworld unit living area with large windows" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Spacious</span>
-            <span class="gallery-overlay-text">Living Area · Natural Light</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Open-Plan Kitchen & Living Layout"
-             data-location="Capital Town, San Fernando, Pampanga"
-             data-type="Studio — Smart Home"
-             data-size="31 sqm"
-             data-price="₱3.1M – ₱4.2M"
-             data-status="Pre-selling"
-             data-features="Fully integrated smart home system, Open floor plan design, Voice-controlled lighting, Energy-efficient appliances, High-speed fiber optic ready"
-             data-img="Showcase5.jpg">
-          <img src="Showcase5.jpg" alt="Megaworld unit open-plan kitchen and living" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Smart Home</span>
-            <span class="gallery-overlay-text">Open-Plan Layout</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Elegant Bathroom with Glass Shower"
-             data-location="Uptown Bonifacio, BGC, Taguig"
-             data-type="1-Bedroom Luxury"
-             data-size="45 sqm"
-             data-price="₱9.8M – ₱12M"
-             data-status="Ready for Occupancy"
-             data-features="Frameless glass shower enclosure, Premium Italian tile, Dual vanity sinks, Bathtub option available, Heated flooring, Designer fixtures"
-             data-img="Showcase6.jpg">
-          <img src="Showcase6.jpg" alt="Megaworld unit bathroom with glass shower" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Luxury</span>
-            <span class="gallery-overlay-text">Bathroom · Glass Shower</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Modern Kitchen with Center Island"
-             data-location="Eastwood City, Quezon City"
-             data-type="2-Bedroom with Den"
-             data-size="72 sqm"
-             data-price="₱8.4M – ₱10.9M"
-             data-status="Resale & RFO"
-             data-features="Large kitchen island with breakfast bar, Quartz countertop, Under-mount sink, Walk-in pantry, Wine cooler space, Open to dining area"
-             data-img="Showcase7.jpg">
-          <img src="Showcase7.jpg" alt="Megaworld unit modern kitchen with island" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Executive</span>
-            <span class="gallery-overlay-text">Modern Kitchen with Island</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Quality Interior Finishes"
-             data-location="Maple Grove, General Trias, Cavite"
-             data-type="Garden Residence"
-             data-size="80 sqm"
-             data-price="₱5.5M – ₱7.8M"
-             data-status="Pre-selling"
-             data-features="Premium imported tile flooring, Painted gypsum ceiling, Built-in wardrobe systems, Double-glazed windows, Garden view from private terrace"
-             data-img="Showcase8.jpg">
-          <img src="Showcase8.jpg" alt="Megaworld unit interior details" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Garden</span>
-            <span class="gallery-overlay-text">Quality Interior Finishes</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Premium Design Details"
-             data-location="Northwin Global City, Bulacan"
-             data-type="3-Bedroom Bi-level"
-             data-size="96 sqm"
-             data-price="₱6.2M – ₱8.8M"
-             data-status="Pre-selling"
-             data-features="Stunning bi-level layout with mezzanine, 3 full bedrooms, 2 bathrooms, Private roof deck option, Expansive views of township, Investment-grade floor plan"
-             data-img="Showcase9.jpg">
-          <img src="Showcase9.jpg" alt="Megaworld unit additional features" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Bi-level</span>
-            <span class="gallery-overlay-text">Premium Design Details</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-
-        <div class="gallery-item reveal"
-             data-modal="gallery"
-             data-title="Township Community Overview"
-             data-location="Megaworld Integrated Township"
-             data-type="Community Amenities"
-             data-size="Master-planned Community"
-             data-price="Starting from ₱3.1M"
-             data-status="Multiple Options Available"
-             data-features="Resort-style swimming pool, Fully equipped gym, Children's play area, Jogging and bike trails, Commercial and retail promenade, 24/7 security"
-             data-img="Showcase10.jpg">
-          <img src="Showcase10.jpg" alt="Megaworld property exterior view" loading="lazy">
-          <div class="gallery-overlay">
-            <span class="gallery-tag">Township</span>
-            <span class="gallery-overlay-text">Township Community</span>
-          </div>
-          <div class="gallery-click-hint">🔍 View Details</div>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top: 36px;">
-        <a href="#contact" class="btn btn-gold">Inquire About a Unit ✦</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FEATURED RESIDENCES ============ -->
-  <section class="residences" id="residences">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Featured Portfolio</p>
-        <h2 class="section-title">Townships Erica is currently<br><em>placing buyers in</em></h2>
-        <p class="section-sub">Click any township card for full details — ask Erica for current unit availability, floor plans, and promos.</p>
-      </div>
-
-      <div class="residence-grid">
-
-        <article class="r-card reveal"
-                 data-modal="residence"
-                 data-title="Uptown Bonifacio"
-                 data-location="Taguig · BGC"
-                 data-desc="A vibrant high-rise address inside Bonifacio Global City — built around nightlife, dining, and a short walk to Metro Manila's biggest business hub. Ideal for young professionals and investors seeking premium urban living."
-                 data-types="Studio · 1BR · 2BR"
-                 data-status="Pre-selling &amp; RFO"
-                 data-price="₱5.5M – ₱18M"
-                 data-highlights="Walking distance to BGC shops &amp; restaurants|Rooftop amenity deck with city views|World-class building management|High rental yield potential|0% interest flexible payment terms"
-                 data-img="Showcase1.jpg">
-          <div class="r-visual">
-            <img src="Showcase1.jpg" alt="Uptown Bonifacio — BGC Megaworld Township" loading="lazy">
-            <div class="r-visual-overlay"></div>
-          </div>
-          <div class="r-body">
-            <span class="r-tag">Taguig · BGC</span>
-            <h3>Uptown Bonifacio</h3>
-            <p>A vibrant high-rise address inside Bonifacio Global City — built around nightlife, dining and a short walk to Metro Manila's biggest business hub.</p>
-            <div class="r-meta"><span>Studio – 2BR</span><span>Pre-selling &amp; RFO</span></div>
-            <span class="r-link">Tap to view details →</span>
-          </div>
-        </article>
-
-        <article class="r-card reveal"
-                 data-modal="residence"
-                 data-title="McKinley West"
-                 data-location="Taguig · Fort Bonifacio"
-                 data-desc="An upscale, tree-lined township beside Forbes Park and the Manila Polo Club — low-density condo living minutes from BGC and Makati. Perfect for those seeking exclusivity with accessibility."
-                 data-types="1BR · 2BR · Penthouse"
-                 data-status="Pre-selling"
-                 data-price="₱8.2M – ₱45M"
-                 data-highlights="Adjacent to Forbes Park and Manila Polo Club|Low-density, exclusive community feel|Lush green landscaping throughout|Premium amenities including putting green|Strong capital appreciation history"
-                 data-img="Showcase4.jpg">
-          <div class="r-visual">
-            <img src="Showcase4.jpg" alt="McKinley West — Taguig Megaworld Township" loading="lazy">
-            <div class="r-visual-overlay"></div>
-          </div>
-          <div class="r-body">
-            <span class="r-tag">Taguig · Fort Bonifacio</span>
-            <h3>McKinley West</h3>
-            <p>An upscale, tree-lined township beside Forbes Park and the Manila Polo Club — low-density condo living minutes from BGC and Makati.</p>
-            <div class="r-meta"><span>1BR – Penthouse</span><span>Pre-selling</span></div>
-            <span class="r-link">Tap to view details →</span>
-          </div>
-        </article>
-
-        <article class="r-card reveal"
-                 data-modal="residence"
-                 data-title="Northwin Global City"
-                 data-location="Marilao-Bocaue, Bulacan"
-                 data-desc="A rising township north of Manila, minutes from the NLEX Marilao exit — built for commuters who want space without leaving the city grid behind. One of Megaworld's fastest-growing projects."
-                 data-types="Studio · 1BR · 2BR · 3BR Bi-level"
-                 data-status="Pre-selling"
-                 data-price="₱3.8M – ₱9.5M"
-                 data-highlights="Minutes from NLEX Marilao exit|Massive 50-hectare integrated township|Commercial strips and schools within community|Excellent affordability vs. Metro Manila|Strong OFW buyer community"
-                 data-img="Showcase2.jpg">
-          <div class="r-visual">
-            <img src="Showcase2.jpg" alt="Northwin Global City — Bulacan Megaworld Township" loading="lazy">
-            <div class="r-visual-overlay"></div>
-          </div>
-          <div class="r-body">
-            <span class="r-tag">Marilao-Bocaue, Bulacan</span>
-            <h3>Northwin Global City</h3>
-            <p>A rising township north of Manila, minutes from the NLEX Marilao exit — built for commuters who want space without leaving the city grid behind.</p>
-            <div class="r-meta"><span>Studio – 3BR Bi-level</span><span>Pre-selling</span></div>
-            <span class="r-link">Tap to view details →</span>
-          </div>
-        </article>
-
-        <article class="r-card reveal"
-                 data-modal="residence"
-                 data-title="Capital Town"
-                 data-location="San Fernando, Pampanga"
-                 data-desc="Pampanga's smart-home business and residential district, anchored by the Capitol Blvd corridor and a fast-growing shophouse scene. A future-forward township designed for the modern Filipino."
-                 data-types="Smart-home Studios · 1BR · 2BR"
-                 data-status="Pre-selling"
-                 data-price="₱2.8M – ₱6.5M"
-                 data-highlights="Integrated smart home technology in all units|Near Clark International Airport|Pampanga's premier business district address|Shophouse commercial units available|Government infrastructure driving value"
-                 data-img="Showcase5.jpg">
-          <div class="r-visual">
-            <img src="Showcase5.jpg" alt="Capital Town — Pampanga Megaworld Township" loading="lazy">
-            <div class="r-visual-overlay"></div>
-          </div>
-          <div class="r-body">
-            <span class="r-tag">San Fernando, Pampanga</span>
-            <h3>Capital Town</h3>
-            <p>Pampanga's smart-home business and residential district, anchored by the Capitol Blvd corridor and a fast-growing shophouse scene.</p>
-            <div class="r-meta"><span>Smart-home Condos</span><span>Pre-selling</span></div>
-            <span class="r-link">Tap to view details →</span>
-          </div>
-        </article>
-
-        <article class="r-card reveal"
-                 data-modal="residence"
-                 data-title="Maple Grove"
-                 data-location="General Trias, Cavite"
-                 data-desc="A quieter, garden-style township along the Cavite coastal corridor — countryside calm with city-grade conveniences close by. The perfect escape from Metro Manila with excellent lifestyle amenities."
-                 data-types="Garden Residences · House &amp; Lot · Lots"
-                 data-status="Pre-selling"
-                 data-price="₱4.5M – ₱12M"
-                 data-highlights="Nature-inspired garden township design|House and lot options with private gardens|Near Cavite-Laguna Expressway (CALAX)|Peaceful residential atmosphere|Ideal for families seeking more space"
-                 data-img="Showcase3.jpg">
-          <div class="r-visual">
-            <img src="Showcase3.jpg" alt="Maple Grove — Cavite Megaworld Township" loading="lazy">
-            <div class="r-visual-overlay"></div>
-          </div>
-          <div class="r-body">
-            <span class="r-tag">General Trias, Cavite</span>
-            <h3>Maple Grove</h3>
-            <p>A quieter, garden-style township along the Cavite coastal corridor — countryside calm with city-grade conveniences close by.</p>
-            <div class="r-meta"><span>Residences &amp; Lots</span><span>Pre-selling</span></div>
-            <span class="r-link">Tap to view details →</span>
-          </div>
-        </article>
-
-        <article class="r-card reveal"
-                 data-modal="residence"
-                 data-title="Eastwood City"
-                 data-location="Quezon City"
-                 data-desc="Megaworld's original cyberpark — a mature, walkable community with two decades of rental and resale track record. A proven investment with established tenant demand and active lifestyle amenities."
-                 data-types="Studio · 1BR · 2BR"
-                 data-status="Resale &amp; RFO"
-                 data-price="₱6.5M – ₱18M"
-                 data-highlights="Megaworld's first and most established township|20+ years of proven rental income track record|Cyberpark district with BPO office demand|Eastwood Mall and lifestyle strip|Active resale market with strong liquidity"
-                 data-img="Showcase7.jpg">
-          <div class="r-visual">
-            <img src="Showcase7.jpg" alt="Eastwood City — Quezon City Megaworld Township" loading="lazy">
-            <div class="r-visual-overlay"></div>
-          </div>
-          <div class="r-body">
-            <span class="r-tag">Quezon City</span>
-            <h3>Eastwood City</h3>
-            <p>Megaworld's original cyberpark — a mature, walkable community with two decades of rental and resale track record.</p>
-            <div class="r-meta"><span>Studio – 2BR</span><span>Resale &amp; RFO</span></div>
-            <span class="r-link">Tap to view details →</span>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ VIDEO REEL WALL ============ -->
-  <section class="reels" id="tours">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Video Tours</p>
-        <h2 class="section-title">See it before you visit</h2>
-        <p class="section-sub">Real walkthroughs from Erica's page — watch through, then book the in-person tour.</p>
-      </div>
-
-      <div class="reel-wall" id="reelWall">
-
-        <div class="reel-frame reveal">
-          <div class="video-wrapper">
-            <video class="reel-video" width="267" height="476" autoplay loop muted playsinline controls preload="metadata" title="Property tour reel 1">
-              <source src="Video1.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <a class="reel-fallback" href="https://www.facebook.com/reel/1556840669190677" target="_blank" rel="noopener">Watch on Facebook ↗</a>
-        </div>
-
-        <div class="reel-frame reveal">
-          <div class="video-wrapper">
-            <video class="reel-video" width="267" height="476" autoplay loop muted playsinline controls preload="metadata" title="Property tour reel 2">
-              <source src="Video2.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <a class="reel-fallback" href="https://www.facebook.com/reel/1329810749199180" target="_blank" rel="noopener">Watch on Facebook ↗</a>
-        </div>
-
-        <div class="reel-frame reveal">
-          <div class="video-wrapper">
-            <video class="reel-video" width="267" height="476" autoplay loop muted playsinline controls preload="metadata" title="Property tour reel 3">
-              <source src="Video3.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <a class="reel-fallback" href="https://www.facebook.com/reel/1948524715790318" target="_blank" rel="noopener">Watch on Facebook ↗</a>
-        </div>
-
-        <div class="reel-frame reveal">
-          <div class="video-wrapper">
-            <video class="reel-video" width="267" height="476" autoplay loop muted playsinline controls preload="metadata" title="Property tour reel 4">
-              <source src="Video4.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-          <a class="reel-fallback" href="https://www.facebook.com/reel/1769858687698135" target="_blank" rel="noopener">Watch on Facebook ↗</a>
-        </div>
-
-      </div>
-      <p class="reel-hint">← Swipe or scroll to see more tours →</p>
-    </div>
-  </section>
-
-  <!-- ============ PROCESS ============ -->
-  <section class="process">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">How It Works</p>
-        <h2 class="section-title">From first message to<br><em>turnover day</em></h2>
-      </div>
-      <div class="process-grid">
-        <div class="process-step reveal">
-          <span class="step-no">01</span>
-          <h3>Discover</h3>
-          <p>Tell Erica your budget, timeline, and must-haves. She shortlists the townships and unit types that actually fit your life — no pressure, just clarity.</p>
-        </div>
-        <div class="process-step reveal">
-          <span class="step-no">02</span>
-          <h3>Tour</h3>
-          <p>Walk the model unit and the amenities in person, or start with a video walkthrough if you're abroad or out of town. Erica makes it effortless.</p>
-        </div>
-        <div class="process-step reveal">
-          <span class="step-no">03</span>
-          <h3>Own</h3>
-          <p>Erica handles reservation, documentation and financing terms, and stays with you right through to turnover day — and beyond.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TESTIMONIALS ============ -->
-  <section class="testimonials" id="testimonials">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <p class="eyebrow">Clients</p>
-        <h2 class="section-title">People Erica has<br><em>helped move in</em></h2>
-      </div>
-      <div class="testi-grid">
-        <blockquote class="testi-card reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p>"Erica walked us through every step of reserving our unit in McKinley West — patient with every question, even the small ones. We felt guided, never rushed."</p>
-          <cite>— A. Reyes, McKinley West</cite>
-        </blockquote>
-        <blockquote class="testi-card reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p>"We were purchasing from abroad and Erica handled the site visits and paperwork on our behalf. She made the whole process completely painless from Dubai."</p>
-          <cite>— M. Santos, OFW Buyer</cite>
-        </blockquote>
-        <blockquote class="testi-card reveal">
-          <div class="testi-stars">★★★★★</div>
-          <p>"Straightforward about the numbers, honest about the timeline. That's rare in this market — Erica is genuinely one of a kind. Highly recommend her to everyone."</p>
-          <cite>— J. dela Cruz, Northwin Global City</cite>
-        </blockquote>
-      </div>
-      <p class="testi-note">Sample testimonials shown — swap in real client feedback before publishing.</p>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT / CTA ============ -->
-  <section class="contact" id="contact">
-    <div class="wrap contact-grid">
-      <div class="contact-copy reveal">
-        <p class="eyebrow">Get In Touch</p>
-        <h2 class="section-title">Let's find your <em>perfect</em> address together.</h2>
-        <p class="section-sub">Send your details and Erica will follow up personally — usually within one business day.</p>
-
-        <div class="contact-chips">
-          <a href="tel:+639515298465" class="chip" id="chip-call">📞 Call / Text Erica</a>
-          <a href="https://wa.me/639515298465" target="_blank" rel="noopener" class="chip" id="chip-whatsapp">💬 WhatsApp / Viber</a>
-          <a href="https://www.facebook.com/profile.php?id=61560074327244" target="_blank" rel="noopener" class="chip" id="chip-fb">📘 Facebook Page</a>
-        </div>
-        <p class="contact-note">Reach Erica at +63 0951 529 8465 via SMS, Viber or WhatsApp.</p>
-      </div>
-
-      <form class="contact-form reveal" id="contactForm">
-        <div class="form-row">
-          <label>
-            Full name
-            <input type="text" name="name" id="input-name" required placeholder="Juan Dela Cruz">
-          </label>
-          <label>
-            Mobile / Viber number
-            <input type="tel" name="phone" id="input-phone" required placeholder="09XX XXX XXXX">
-          </label>
-        </div>
-        <label>
-          Email address
-          <input type="email" name="email" id="input-email" required placeholder="you@email.com">
-        </label>
-        <label>
-          Township of interest
-          <select name="township" id="input-township">
-            <option>Uptown Bonifacio</option>
-            <option>McKinley West</option>
-            <option>Northwin Global City</option>
-            <option>Capital Town</option>
-            <option>Maple Grove</option>
-            <option>Eastwood City</option>
-            <option>Not sure yet — help me decide</option>
-          </select>
-        </label>
-        <label>
-          Message
-          <textarea name="message" id="input-message" rows="4" placeholder="Tell Erica about your budget, timeline, or questions..."></textarea>
-        </label>
-        <button type="submit" class="btn btn-primary btn-block" id="btn-submit">Send Inquiry</button>
-        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
-
-</main>
-
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer-col footer-brand">
-      <img src="logo.png" alt="Erica Bolante Logo" class="footer-logo" width="64" height="64">
-      <p class="footer-name">Erica Cristal Bolante</p>
-      <p class="footer-tag">Property Specialist, Megaworld Corporation</p>
-    </div>
-
-    <div class="footer-col">
-      <h4>Explore</h4>
-      <a href="#gallery">Gallery</a>
-      <a href="#residences">Residences</a>
-      <a href="#tours">Video Tours</a>
-      <a href="#about">About Erica</a>
-      <a href="#testimonials">Clients</a>
-      <a href="#contact">Contact</a>
-    </div>
-
-    <div class="footer-col">
-      <h4>Townships</h4>
-      <a href="#residences">Uptown Bonifacio</a>
-      <a href="#residences">McKinley West</a>
-      <a href="#residences">Northwin Global City</a>
-      <a href="#residences">Capital Town</a>
-      <a href="#residences">Maple Grove</a>
-      <a href="#residences">Eastwood City</a>
-    </div>
-
-    <div class="footer-col">
-      <h4>Connect</h4>
-      <a href="tel:+639515298465">📞 +63 0951 529 8465</a>
-      <a href="https://wa.me/639515298465" target="_blank" rel="noopener">💬 WhatsApp / Viber</a>
-      <a href="https://www.facebook.com/profile.php?id=61560074327244" target="_blank" rel="noopener">📘 Facebook Page</a>
     </div>
   </div>
+  <div class="hero-skyline" aria-hidden="true">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <g class="skyline-glow" fill="none" stroke="#C6A15B" stroke-width="1.4" opacity="0.55">
+        <polyline points="0,260 0,150 40,150 40,110 90,110 90,160 140,160 140,90 150,90 150,60 165,60 165,90 180,90 180,170 230,170 230,120 260,120 260,140 300,140 300,80 320,80 320,50 335,50 335,80 350,80 350,140 400,140 400,100 460,100 460,170 500,170 500,60 520,60 520,30 540,30 540,60 560,60 560,170 620,170 620,120 660,120 660,90 700,90 700,150 760,150 760,70 780,70 780,40 800,40 800,70 820,70 820,150 880,150 880,110 930,110 930,170 980,170 980,80 1010,80 1010,50 1030,50 1030,80 1050,80 1050,170 1120,170 1120,130 1160,130 1160,180 1200,180 1200,260"/>
+      </g>
+      <g fill="#E7CE9C">
+        <circle cx="45" cy="130" r="1.6"/><circle cx="95" cy="135" r="1.6"/><circle cx="155" cy="75" r="1.6"/>
+        <circle cx="235" cy="145" r="1.6"/><circle cx="325" cy="65" r="1.6"/><circle cx="405" cy="120" r="1.6"/>
+        <circle cx="465" cy="140" r="1.6"/><circle cx="525" cy="45" r="1.6"/><circle cx="625" cy="145" r="1.6"/>
+        <circle cx="705" cy="120" r="1.6"/><circle cx="785" cy="55" r="1.6"/><circle cx="885" cy="130" r="1.6"/>
+        <circle cx="985" cy="105" r="1.6"/><circle cx="1035" cy="65" r="1.6"/><circle cx="1125" cy="150" r="1.6"/>
+      </g>
+    </svg>
+  </div>
+</section>
 
-  <div class="wrap footer-bottom">
-    <p>© <span id="year"></span> Erica Cristal Bolante. All rights reserved.</p>
-    <p class="footer-affiliation">
-      Proud Property Specialist under
-      <a href="https://www.megaworldcorp.com/" target="_blank" rel="noopener">Megaworld Corporation</a>
-    </p>
+<!-- ============================================================
+     ABOUT
+============================================================ -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-card reveal">
+      <div class="about-avatar"><img src="profile.jpg" alt="Erica Cristal" width="84" height="84"></div>
+      <h3>Erica Cristal</h3>
+      <span class="role">Megaworld RFO Premier Realtor</span>
+      <ul class="why-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Personalized Property Consultation</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free Property Viewing</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Reservation Assistance</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Bank Financing Guidance</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Investment Consultation</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Exclusive Promos &amp; Discounts</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> End-to-End Assistance Until Move-In</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Professional &amp; Responsive Service</li>
+      </ul>
+    </div>
+    <div class="about-copy reveal">
+      <p class="eyebrow">Trusted Real Estate Advisor</p>
+      <h2>Real estate is more than buying a property — it's the right decision for your future.</h2>
+      <p>I'm Erica Cristal, a Megaworld RFO Premier Realtor dedicated to helping professionals, executives, overseas Filipinos (OFWs), and investors navigate the real estate market with confidence. I specialize in Ready-for-Occupancy condominiums located in Megaworld's premier townships, offering homes and investment opportunities in strategic, high-value locations.</p>
+      <p>My role goes beyond presenting available units. I take the time to understand your priorities — whether you're looking for a residence near major business districts, a property that generates long-term value, or a home that complements your lifestyle. Every recommendation is carefully matched to your needs, budget, and investment objectives.</p>
+      <p>From your initial consultation and property viewing to financing, documentation, and turnover, I provide personalized, end-to-end guidance with professionalism, transparency, and attention to detail.</p>
+      <p class="tagline">"Luxury Homes. Smart Investments. Trusted Guidance."</p>
+      <p>I believe lasting relationships are built on trust, honest advice, and exceptional service. My goal isn't simply to help you purchase a property — it's to become your trusted real estate advisor for today's decision and every property decision after it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GALLERY (PROPERTY SHOWCASE)
+============================================================ -->
+<section class="section section-alt" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Property Showcase</p>
+      <h2>A Glimpse Inside Your Future Home</h2>
+      <p>Real interiors from Erica's listings across Megaworld townships — click any photo for the full details.</p>
+    </div>
+    <div class="gallery-grid stagger-grid" id="gallery-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+============================================================ -->
+<section class="section" id="projects">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Available Now</p>
+      <h2>Featured Ready-for-Occupancy Projects</h2>
+      <p>Move in sooner rather than later. Every listing below is ready for occupancy today across Megaworld's premier Metro Manila townships.</p>
+    </div>
+    <div class="filter-tabs reveal" id="filter-tabs"></div>
+    <div class="project-grid stagger-grid" id="project-grid"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     VIDEO TOURS
+============================================================ -->
+<section class="section section-alt" id="tours">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Video Tours</p>
+      <h2>See It Before You Visit</h2>
+      <p>Real walkthroughs from Erica's page — watch through, then book the in-person tour.</p>
+    </div>
+    <div class="reel-wall reveal" id="reel-wall"></div>
+    <p class="reel-hint">← Swipe or scroll to see more tours →</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     LOCATIONS COVERED
+============================================================ -->
+<section class="section" id="locations">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Coverage</p>
+      <h2>Areas I Handle Across Metro Manila</h2>
+      <p>Beyond the featured listings, I assist buyers across every major Megaworld township and business district.</p>
+    </div>
+    <div class="locations-banner reveal">
+      <img src="Showcase10.jpg" alt="Megaworld master-planned township community" loading="lazy">
+      <div class="locations-banner-overlay">
+        <p class="eyebrow">Master-Planned Living</p>
+        <h3>Resort-style amenities, retail promenades &amp; 24/7 security in every township</h3>
+      </div>
+    </div>
+    <div class="locations-grid stagger-grid">
+      <div class="location-card">
+        <h4>Uptown Bonifacio, BGC</h4><span class="loc-sub">Taguig</span>
+        <ul><li>Uptown Parksuites</li><li>One Uptown Residence</li><li>Uptown Ritz</li></ul>
+      </div>
+      <div class="location-card">
+        <h4>McKinley West</h4><span class="loc-sub">Taguig</span>
+        <ul><li>The Albany</li><li>St. Moritz Private Estate</li><li>Park McKinley West</li></ul>
+      </div>
+      <div class="location-card">
+        <h4>McKinley Hill</h4><span class="loc-sub">Taguig</span>
+        <ul><li>The Florence</li><li>St. Mark Residences</li><li>The Venice Luxury Residences</li><li>The Tuscany Private Residences</li><li>McKinley Hill Garden Villas</li></ul>
+      </div>
+      <div class="location-card">
+        <h4>Newport City</h4><span class="loc-sub">Pasay</span>
+        <ul><li>81 Newport Boulevard</li><li>101 Newport Boulevard</li><li>150 Newport Boulevard</li></ul>
+      </div>
+      <div class="location-card">
+        <h4>Manhattan Garden City</h4><span class="loc-sub">Cubao, Quezon City</span>
+        <ul><li>Manhattan Plaza</li><li>Manhattan Parkview</li><li>Manhattan Parkway</li><li>Manhattan Heights</li></ul>
+      </div>
+      <div class="location-card">
+        <h4>Makati CBD</h4><span class="loc-sub">Makati</span>
+        <ul><li>Salcedo SkySuites</li><li>Greenbelt Hamilton</li><li>Greenbelt Madison</li><li>One / Two / Three Central</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROMOS
+============================================================ -->
+<section class="section section-alt" id="promos">
+  <div class="container">
+    <div class="promo-band reveal">
+      <div>
+        <p class="eyebrow">Limited-Time Offers</p>
+        <h2>Exclusive Promos on Selected RFO Units</h2>
+        <p>Enjoy exclusive offers available for selected Ready-for-Occupancy units. Promotions may vary depending on the project and current developer offers.</p>
+        <ul class="promo-checks">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Flexible payment options</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Low down payment offers</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Special discounts, selected projects</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Limited-time developer promotions</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free property consultation</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Complimentary unit viewing</li>
+        </ul>
+        <p class="promo-note">Message me for the latest pricing, promos, and unit availability.</p>
+      </div>
+      <button class="btn btn-gold" data-calendly>Ask About Current Promos</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY INVEST
+============================================================ -->
+<section class="section" id="invest">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">The Case For Megaworld</p>
+      <h2>Why Invest in Megaworld?</h2>
+    </div>
+    <div class="invest-grid stagger-grid">
+      <div class="invest-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg>
+        <div><h4>Prime Township Locations</h4><p>Positioned in Metro Manila's most established mixed-use business districts.</p></div>
+      </div>
+      <div class="invest-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V10M10 21V4M16 21v-8M4 10l6-6 6 5 6-6"/></svg>
+        <div><h4>Ready-for-Occupancy Units</h4><p>Move in sooner — no waiting years for turnover on a pre-selling unit.</p></div>
+      </div>
+      <div class="invest-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8M21 7v6M21 7h-6"/></svg>
+        <div><h4>Strong Rental &amp; Resale Potential</h4><p>Consistent demand from professionals and expats keeps value resilient.</p></div>
+      </div>
+      <div class="invest-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.4"/><path d="M4 20c0-3.6 3.6-6 8-6s8 2.4 8 6"/></svg>
+        <div><h4>Premium Amenities &amp; Management</h4><p>Professionally maintained properties with hotel-grade facilities.</p></div>
+      </div>
+      <div class="invest-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+        <div><h4>End-Users &amp; Investors Alike</h4><p>Ideal whether you plan to live in it, rent it out, or resell it later.</p></div>
+      </div>
+      <div class="invest-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M6 21V8l6-5 6 5v13M10 21v-5h4v5"/></svg>
+        <div><h4>A Leading Philippine Developer</h4><p>Backed by one of the country's most trusted real estate names.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TESTIMONIALS
+============================================================ -->
+<section class="section section-alt" id="testimonials">
+  <div class="container">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Client Stories</p>
+      <h2>What Clients Say</h2>
+    </div>
+    <div class="testimonial-wrap reveal" id="testimonial-wrap">
+      <div class="testimonial-slide active">
+        <div class="stars">★★★★★</div>
+        <blockquote>Erica made our home-buying experience smooth and stress-free. She patiently answered all our questions and guided us from reservation to turnover.</blockquote>
+        <cite>— Homeowner, Taguig</cite>
+      </div>
+      <div class="testimonial-slide">
+        <div class="stars">★★★★★</div>
+        <blockquote>Very professional and responsive. She helped us find the perfect investment property within our budget.</blockquote>
+        <cite>— Property Investor</cite>
+      </div>
+      <div class="testimonial-slide">
+        <div class="stars">★★★★★</div>
+        <blockquote>Highly recommended! The property viewing was well organized, and she explained every detail clearly.</blockquote>
+        <cite>— First-Time Homebuyer</cite>
+      </div>
+      <div class="testimonial-dots" id="testimonial-dots"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     INVESTMENT GUIDE
+============================================================ -->
+<section class="section" id="guide">
+  <div class="container guide-wrap">
+    <div class="reveal">
+      <p class="eyebrow">Step by Step</p>
+      <h2>Your Personal Investment Guide</h2>
+      <p>Whether you're buying your first home or expanding your investment portfolio, I provide personalized guidance to help you make informed decisions — from comparison to move-in.</p>
+      <button class="btn btn-outline" data-calendly>Start My Property Journey</button>
+    </div>
+    <ul class="guide-list reveal">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Property comparison</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Return on investment insights</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Rental income potential</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Financing options</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Reservation assistance</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Documentation support</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Move-in guidance</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="section section-alt" id="faq">
+  <div class="container">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Got Questions?</p>
+      <h2>Frequently Asked Questions</h2>
+      <p>Your complete guide to buying a Ready-for-Occupancy condo — from reservation to move-in.</p>
+    </div>
+    <div class="faq-list reveal">
+      <details class="faq-item" open>
+        <summary>What areas do you handle for RFO units? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">I specialize in Ready-for-Occupancy condominiums across Metro Manila's premier business districts — Uptown Bonifacio (BGC), McKinley West, McKinley Hill, Newport City, Manhattan Garden City, and Makati CBD. If you're looking in any of these locations, I'll help you find the best available unit for your budget, lifestyle, and investment goals.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How much is the reservation fee? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">The reservation fee typically ranges from ₱30,000 to ₱60,000, depending on the project and unit you choose. It secures your selected unit and starts the purchase process. Message me for the latest pricing, promos, and unit availability.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I move in right away? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">Yes. Most Ready-for-Occupancy units allow move-in with only a 3% to 5% down payment, once the required documentation and financing approval are complete.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is the unit semi-furnished or bare? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">
+          It depends on the project and unit. Most Megaworld RFO units include premium finishes such as:
+          <ul>
+            <li>Modular kitchen cabinets</li>
+            <li>Kitchen countertop and sink</li>
+            <li>Built-in wardrobes (selected units)</li>
+            <li>Complete toilet and bath fixtures</li>
+            <li>Split-type air-conditioning provisions or installed units (selected projects)</li>
+          </ul>
+          I'll gladly recommend the best option based on your preferences and budget.
+        </div>
+      </details>
+      <details class="faq-item">
+        <summary>Can foreigners buy a condominium in the Philippines? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">Yes. Foreign nationals may own condominium units in the Philippines, provided foreign ownership within the project does not exceed the legal limit. I can guide you through the requirements and the entire buying process.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can OFWs purchase a condo while abroad? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">Absolutely. OFWs can reserve and purchase a property even while overseas. I assist with online reservation, virtual property presentations, digital document processing, bank financing assistance, and secure payment options — everything can be processed conveniently online.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do you assist with bank financing? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">Yes. I can guide you through the bank financing process and help prepare the necessary requirements from start to finish.</div>
+      </details>
+      <details class="faq-item">
+        <summary>How can I schedule a property viewing? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v16M4 12h16"/></svg></summary>
+        <div class="faq-a">It's easy — message me on Viber, WhatsApp, or Facebook, or use the "Schedule a Viewing" button on this page. Private, virtual, and on-site viewings are available by appointment.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Let's Talk</p>
+      <h2>Let's Find Your Dream Property Today</h2>
+      <p>Whether you're buying for your family or investing for the future, I'm here to guide you every step of the way.</p>
+    </div>
+    <div class="contact-wrap reveal">
+      <div class="contact-info-card">
+        <h3>Contact Erica Cristal</h3>
+        <p>I'd be happy to help you find the right Megaworld property.</p>
+        <div class="contact-rows">
+          <div class="contact-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h4l2 5-2.5 1.5a11 11 0 005 5L13 14l5 2v4a2 2 0 01-2.2 2A16 16 0 013 7.2 2 2 0 015 5z"/></svg></span>
+            <div><small>WhatsApp / Viber / Call</small><a href="https://wa.me/639515298465" target="_blank" rel="noopener">+63 951 529 8465</a></div>
+          </div>
+          <div class="contact-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <div><small>Email</small><a href="mailto:ericacristal.rfo@gmail.com">ericacristal.rfo@gmail.com</a></div>
+          </div>
+          <div class="contact-row">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M4 7l8 6 8-6"/></svg></span>
+            <div><small>Alternate Email</small><a href="mailto:ebolante.megaworldrfo@gmail.com">ebolante.megaworldrfo@gmail.com</a></div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.facebook.com/share/1CmyTsy7iQ/?mibextid=wwXIfr" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 9h3V5h-3a4 4 0 00-4 4v2H7v4h3v6h4v-6h3l1-4h-4v-2a1 1 0 011-1z"/></svg></a>
+          <a href="https://www.instagram.com/megaworldrfobyerica" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="12" cy="12" r="3.2"/><circle cx="16.2" cy="7.8" r="0.6" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.tiktok.com/@megaworld.rfo.ph" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 4v9.5a3.5 3.5 0 11-3.5-3.5"/><path d="M15 4a5 5 0 005 5"/></svg></a>
+          <a href="https://wa.me/639515298465" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 5h4l2 5-2.5 1.5a11 11 0 005 5L13 14l5 2v4a2 2 0 01-2.2 2A16 16 0 013 7.2 2 2 0 015 5z"/></svg></a>
+        </div>
+      </div>
+      <div class="contact-cta-card">
+        <p class="eyebrow">Your Dream Home Is Waiting</p>
+        <h3>Book a free property consultation or an actual unit viewing.</h3>
+        <p>Discover the finest Ready-for-Occupancy condominiums in Megaworld's premier townships. It only takes a minute to get started.</p>
+        <button class="btn btn-gold" data-calendly>Schedule My Free Property Viewing</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="footer-skyline" aria-hidden="true">
+    <svg viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <polyline points="0,60 0,30 40,30 40,15 90,15 90,35 160,35 160,10 190,10 190,40 250,40 250,20 310,20 310,45 380,45 380,15 420,15 420,5 460,5 460,25 520,25 520,45 600,45 600,20 660,20 660,40 720,40 720,10 770,10 770,45 830,45 830,25 900,25 900,5 950,5 950,35 1010,35 1010,15 1080,15 1080,40 1140,40 1140,20 1200,20 1200,60" fill="none" stroke="#C6A15B" stroke-width="1.2"/>
+    </svg>
+  </div>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="logo.png" alt="" width="52" height="52"></div>
+        <h4>Erica Cristal</h4>
+        <p>Megaworld RFO Premier Realtor helping families, professionals, and investors find their perfect Ready-for-Occupancy home across Metro Manila.</p>
+      </div>
+      <div>
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="#about">About Erica</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#tours">Video Tours</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Townships</h5>
+        <ul>
+          <li><a href="#projects">Uptown Bonifacio</a></li>
+          <li><a href="#projects">McKinley West</a></li>
+          <li><a href="#projects">McKinley Hill</a></li>
+          <li><a href="#locations">More Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="https://wa.me/639515298465" target="_blank" rel="noopener">+63 951 529 8465</a></li>
+          <li><a href="mailto:ericacristal.rfo@gmail.com">ericacristal.rfo@gmail.com</a></li>
+          <li><a href="https://www.facebook.com/share/1CmyTsy7iQ/?mibextid=wwXIfr" target="_blank" rel="noopener">Facebook Page</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Erica Cristal — Megaworld RFO Premier by Erica. All rights reserved.</span>
+      <span>Luxury Homes. Smart Investments. Trusted Guidance.</span>
+    </div>
   </div>
 </footer>
 
-<!-- ============ FLOATING WHATSAPP ============ -->
-<a href="https://wa.me/639515298465" target="_blank" rel="noopener" class="whatsapp-float" id="whatsappFloat" aria-label="Chat on WhatsApp">
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
-  </svg>
-</a>
+<!-- ============================================================
+     PROJECT DETAIL MODAL
+============================================================ -->
+<div class="modal-overlay" id="project-modal">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <button class="modal-close" data-close-modal aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="lb-img-wrap"><img id="pm-img" src="" alt=""></div>
+    <span class="pm-tag" id="pm-location">Location</span>
+    <h3 id="project-modal-title">Project Name</h3>
+    <p class="modal-sub" id="pm-desc">Description</p>
+    <div class="pm-specs" id="pm-specs"></div>
+    <button class="btn btn-gold btn-block" id="pm-inquire-btn">Inquire About This Project</button>
+  </div>
+</div>
 
-<!-- ============ PROPERTY DETAIL DIALOG ============ -->
-<dialog class="prop-dialog" id="propModal" closedby="any" aria-labelledby="propModalTitle">
-  <div class="prop-modal-card">
-    <button class="prop-modal-close" id="propModalClose" aria-label="Close property details">✕</button>
-    <div class="prop-modal-img-wrap">
-      <img src="" alt="" id="propModalImg" class="prop-modal-img">
-      <div class="prop-modal-img-overlay"></div>
-      <div class="prop-modal-badges">
-        <span class="prop-badge-status" id="propModalStatus"></span>
-      </div>
-    </div>
-    <div class="prop-modal-body">
-      <p class="prop-modal-location" id="propModalLocation"></p>
-      <h3 class="prop-modal-title" id="propModalTitle"></h3>
-      <div class="prop-modal-specs" id="propModalSpecs"></div>
-      <div class="prop-modal-features" id="propModalFeatures"></div>
-      <div class="prop-modal-actions">
-        <a href="#contact" class="btn btn-primary prop-modal-cta" id="propModalCta">Inquire About This Property</a>
-        <a href="https://wa.me/639515298465" target="_blank" rel="noopener" class="btn btn-secondary">💬 WhatsApp Erica</a>
-      </div>
+<!-- ============================================================
+     GALLERY DETAIL MODAL
+============================================================ -->
+<div class="modal-overlay" id="gallery-modal">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="gallery-modal-title">
+    <button class="modal-close" data-close-modal aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="lb-img-wrap"><img id="gm-img" src="" alt=""></div>
+    <span class="pm-tag" id="gm-location">Location</span>
+    <h3 id="gallery-modal-title">Photo Title</h3>
+    <div class="pm-specs" id="gm-specs"></div>
+    <button class="btn btn-gold btn-block" id="gm-inquire-btn">Ask Erica About This Unit</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     PROMO POPUP MODAL (auto after 5s)
+============================================================ -->
+<div class="modal-overlay promo-modal" id="promo-modal">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="promo-title">
+    <button class="modal-close" data-close-modal aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <span class="modal-eyebrow">Limited-Time Offer</span>
+    <h3 id="promo-title">Exclusive RFO Promos Are Live</h3>
+    <p class="modal-sub">Selected Megaworld Ready-for-Occupancy units currently qualify for special developer promotions.</p>
+    <ul class="promo-list">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Flexible payment options</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Low down payment offers</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Free property consultation</li>
+    </ul>
+    <button class="btn btn-gold btn-block" id="promo-claim-btn">Claim This Offer</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     BACKGROUND MUSIC (autoplay + loop, 50% volume, toggle button)
+============================================================ -->
+<audio id="bg-music" src="bgmusic.mp3" loop preload="auto"></audio>
+
+<button class="floating-music-btn" id="music-toggle" aria-label="Play background music">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+</button>
+
+<!-- ============================================================
+     FLOATING SCHEDULE CTA (custom-built, replaces Calendly's default badge)
+============================================================ -->
+<button class="floating-cta" id="floating-cta" data-calendly aria-label="Schedule a viewing">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+  Schedule a Viewing
+</button>
+
+<script>
+/* ============================================================
+   DATA
+   ============================================================ */
+const PROJECTS = [
+  {id:"uptown-parksuites", name:"Uptown Parksuites", location:"Uptown Bonifacio, Taguig", area:"41.5 – 95 sqm",
+    units:"1BR · 2BR · 3BR", desc:"A landmark residential tower in the heart of Uptown Bonifacio, steps from BGC's business and lifestyle district.", img:"Showcase1.jpg"},
+  {id:"park-mckinley-west", name:"Park McKinley West", location:"McKinley West, Taguig", area:"35 – 106 sqm",
+    units:"1BR · 2BR", desc:"Resort-inspired living within the master-planned McKinley West township, close to embassies and international schools.", img:"Showcase4.jpg"},
+  {id:"the-albany", name:"The Albany", location:"McKinley West, Taguig", area:"117 – 143 sqm",
+    units:"2BR · 3BR", desc:"Spacious family-sized residences with premium finishes in one of Taguig's most exclusive enclaves.", img:"Showcase9.jpg"},
+  {id:"the-florence", name:"The Florence", location:"McKinley Hill, Taguig", area:"39.5 – 95 sqm",
+    units:"Studio · 1BR · 2BR", desc:"Italian-inspired residences set within the green, walkable streets of McKinley Hill.", img:"Showcase2.jpg"},
+  {id:"venice-luxury", name:"The Venice Luxury Residences", location:"McKinley Hill, Taguig", area:"39 – 120 sqm",
+    units:"Studio · 1BR · 2BR", desc:"Canal-inspired luxury living moments from McKinley Hill's business park and international schools.", img:"Showcase6.jpg"},
+  {id:"st-moritz", name:"St. Moritz Private Estate", location:"McKinley West, Taguig", area:"117 – 145 sqm",
+    units:"2BR · 3BR", desc:"Alpine-inspired private residences offering privacy and space for growing families.", img:"Showcase8.jpg"},
+  {id:"manhattan-plaza", name:"Manhattan Plaza Tower 1–2", location:"Araneta City, Quezon City", area:"28 – 89 sqm",
+    units:"Studio · 1BR · 2BR", desc:"Urban condominium living at the center of Araneta City's retail, dining, and transport hub.", img:"Showcase7.jpg"},
+  {id:"tulip-gardens", name:"Tulip Gardens", location:"Southwoods City", area:"23 – 41 sqm",
+    units:"Studio · 1BR", desc:"Affordable, garden-inspired residences within the expansive Southwoods City township.", img:"Showcase3.jpg"},
+  {id:"holland-park", name:"Holland Park", location:"Southwoods City", area:"23 – 58 sqm",
+    units:"Studio · 1BR · 2BR", desc:"European-themed low-density residences set among landscaped gardens in Southwoods City.", img:"Showcase5.jpg"}
+];
+
+const GALLERY = [
+  {id:"g1", title:"Balcony City View — RFO Unit", location:"Uptown Bonifacio, BGC, Taguig", type:"1-Bedroom Condominium", size:"42 sqm", status:"Ready for Occupancy", img:"Showcase1.jpg", tag:"RFO Unit", cls:"wide tall"},
+  {id:"g2", title:"Bedroom with Balcony Access", location:"McKinley West, Taguig", type:"1-Bedroom Premium Unit", size:"38 sqm", status:"Pre-selling", img:"Showcase2.jpg", tag:"Premium", cls:""},
+  {id:"g3", title:"Modern Kitchen with Wood Accents", location:"Southwoods City", type:"2-Bedroom Unit", size:"54 sqm", status:"Pre-selling", img:"Showcase3.jpg", tag:"Modern", cls:""},
+  {id:"g4", title:"Spacious Living Area", location:"McKinley West, Taguig", type:"2-Bedroom Unit", size:"68 sqm", status:"Pre-selling", img:"Showcase4.jpg", tag:"Spacious", cls:"tall"},
+  {id:"g5", title:"Open-Plan Kitchen &amp; Living Layout", location:"Southwoods City", type:"Studio — Smart Home", size:"31 sqm", status:"Pre-selling", img:"Showcase5.jpg", tag:"Smart Home", cls:""},
+  {id:"g6", title:"Elegant Bathroom with Glass Shower", location:"McKinley Hill, Taguig", type:"1-Bedroom Luxury", size:"45 sqm", status:"Ready for Occupancy", img:"Showcase6.jpg", tag:"Luxury", cls:""},
+  {id:"g7", title:"Modern Kitchen with Center Island", location:"Araneta City, Quezon City", type:"2-Bedroom with Den", size:"72 sqm", status:"Resale &amp; RFO", img:"Showcase7.jpg", tag:"Executive", cls:"wide"},
+  {id:"g8", title:"Quality Interior Finishes", location:"McKinley West, Taguig", type:"Private Estate Residence", size:"117 sqm", status:"Pre-selling", img:"Showcase8.jpg", tag:"Estate", cls:""},
+  {id:"g9", title:"Premium Design Details", location:"McKinley West, Taguig", type:"3-Bedroom Bi-level", size:"96 sqm", status:"Pre-selling", img:"Showcase9.jpg", tag:"Bi-level", cls:""}
+];
+
+const LOCATIONS = ["All", ...new Set(PROJECTS.map(p => p.location.split(",")[0]))];
+
+/* ============================================================
+   RENDER: GALLERY GRID
+   ============================================================ */
+const galleryGridEl = document.getElementById("gallery-grid");
+galleryGridEl.innerHTML = GALLERY.map(g => `
+  <div class="gallery-item ${g.cls}" data-gallery="${g.id}">
+    <img src="${g.img}" alt="${g.title} — Erica Cristal listings" loading="lazy">
+    <div class="gallery-item-overlay">
+      <span class="gallery-item-tag">${g.tag}</span>
+      <span class="gallery-item-title">${g.title}</span>
+      <span class="gallery-item-loc">${g.location}</span>
     </div>
   </div>
-</dialog>
+`).join("");
 
-<!-- ============ OFFER DIALOG ============ -->
-<dialog class="offer-dialog" id="offerModal" closedby="any" aria-labelledby="offerTitle">
-  <div class="modal-card">
-    <button class="modal-close" id="modalClose" aria-label="Close offer">&times;</button>
-    <p class="modal-eyebrow">✦ Limited Availability This Month</p>
-    <h3 id="offerTitle">Your dream address might already have a reservation list.</h3>
-    <p class="modal-body">
-      Ask Erica about ongoing <strong>0% interest</strong> and flexible in-house financing promos across select
-      Megaworld townships — plus a complimentary consultation and site tour, no obligation.
-    </p>
-    <div class="modal-actions">
-      <a href="#contact" class="btn btn-primary btn-block" id="modalCta">Claim My Free Consultation</a>
-      <button class="btn-text" id="modalDismiss">Maybe later</button>
+/* ============================================================
+   RENDER: PROJECT FILTERS + GRID
+   ============================================================ */
+const tabsEl = document.getElementById("filter-tabs");
+const gridEl = document.getElementById("project-grid");
+const CALENDLY_BASE_URL = "https://calendly.com/ericacristal-rfo/30min";
+/* Calendly lets us recolor its own booking page via query params.
+   We sync it to the site's current light/dark theme so it always
+   reads as light, airy, and on-brand rather than the default look. */
+function calendlyThemeParams(){
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  const bg = isDark ? "10203e" : "ffffff";
+  const text = isDark ? "edeae0" : "16213a";
+  const primary = isDark ? "d9b76c" : "c9a567";
+  return `background_color=${bg}&text_color=${text}&primary_color=${primary}`;
+}
+function getCalendlyUrl(){
+  return `${CALENDLY_BASE_URL}?${calendlyThemeParams()}`;
+}
+let selectedProjectName = "";
+
+function specIcon(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h18M3 12a9 9 0 019-9m-9 9a9 9 0 009 9m0-18a9 9 0 019 9m-9-9v18m9-9a9 9 0 01-9 9"/></svg>';
+}
+function pinIcon(){
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.2 7-11.5A7 7 0 105 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>';
+}
+
+function renderTabs(active){
+  tabsEl.innerHTML = LOCATIONS.map(loc =>
+    `<button class="filter-tab${loc===active?' active':''}" data-loc="${loc}">${loc}</button>`
+  ).join("");
+}
+
+function renderGrid(filter){
+  const list = filter==="All" ? PROJECTS : PROJECTS.filter(p => p.location.startsWith(filter));
+  gridEl.innerHTML = list.map(p => `
+    <div class="project-card">
+      <div class="project-card-media" data-view-project="${p.id}">
+        <img src="${p.img}" alt="${p.name} — ${p.location}" loading="lazy">
+        <span class="badge">Ready for Occupancy</span>
+      </div>
+      <div class="project-card-body">
+        <span class="project-tag">${p.location}</span>
+        <h4>${p.name}</h4>
+        <div class="project-specs">
+          <span>${pinIcon()} ${p.units}</span>
+          <span>${specIcon()} ${p.area}</span>
+        </div>
+        <div class="project-actions">
+          <button class="btn btn-outline btn-sm" data-view-project="${p.id}">View Details</button>
+          <button class="btn btn-gold btn-sm" data-inquire-project="${p.id}">Inquire</button>
+        </div>
+      </div>
     </div>
-    <p class="modal-fine">Promo terms vary by township and are subject to availability. Ask Erica for current details.</p>
-  </div>
-</dialog>
+  `).join("");
+}
 
-<script src="script.js"></script>
+renderTabs("All");
+renderGrid("All");
+
+tabsEl.addEventListener("click", e => {
+  const btn = e.target.closest(".filter-tab");
+  if(!btn) return;
+  renderTabs(btn.dataset.loc);
+  renderGrid(btn.dataset.loc);
+});
+
+/* ============================================================
+   RENDER: VIDEO TOURS REEL WALL
+   ============================================================ */
+const REELS = [
+  {src:"Video1.mp4", fallback:"https://www.facebook.com/reel/1556840669190677"},
+  {src:"Video2.mp4", fallback:"https://www.facebook.com/reel/1329810749199180"},
+  {src:"Video3.mp4", fallback:"https://www.facebook.com/reel/1948524715790318"},
+  {src:"Video4.mp4", fallback:"https://www.facebook.com/reel/1769858687698135"}
+];
+const reelWallEl = document.getElementById("reel-wall");
+reelWallEl.innerHTML = REELS.map((r,i) => `
+  <div class="reel-frame">
+    <div class="reel-video-wrap">
+      <span class="reel-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg> Tour ${i+1}</span>
+      <video autoplay loop muted playsinline controls preload="metadata" title="Property tour reel ${i+1}">
+        <source src="${r.src}" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <a class="reel-fallback" href="${r.fallback}" target="_blank" rel="noopener">Watch on Facebook ↗</a>
+  </div>
+`).join("");
+
+function calendlyUrl(){
+  const base = getCalendlyUrl();
+  return selectedProjectName
+    ? `${base}&utm_content=${encodeURIComponent(selectedProjectName)}`
+    : base;
+}
+function openCalendlyPopup(){
+  if(window.Calendly && typeof window.Calendly.initPopupWidget === "function"){
+    window.Calendly.initPopupWidget({url:calendlyUrl()});
+  } else {
+    window.open(calendlyUrl(), "_blank", "noopener");
+  }
+}
+
+/* ============================================================
+   MODALS (generic open/close)
+   ============================================================ */
+function openModal(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeModal(el){
+  el.classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.addEventListener("click", e => {
+  const calendlyBtn = e.target.closest("[data-calendly]");
+  if(calendlyBtn){ openCalendlyPopup(); return; }
+
+  const opener = e.target.closest("[data-open-modal]");
+  if(opener){ openModal(opener.dataset.openModal); return; }
+
+  const closer = e.target.closest("[data-close-modal]");
+  if(closer){ closeModal(closer.closest(".modal-overlay")); return; }
+
+  if(e.target.classList.contains("modal-overlay")){ closeModal(e.target); return; }
+
+  const viewBtn = e.target.closest("[data-view-project]");
+  if(viewBtn){ openProjectModal(viewBtn.dataset.viewProject); return; }
+
+  const inquireBtn = e.target.closest("[data-inquire-project]");
+  if(inquireBtn){ prefillProject(inquireBtn.dataset.inquireProject); openCalendlyPopup(); return; }
+
+  const galleryItem = e.target.closest("[data-gallery]");
+  if(galleryItem){ openGalleryModal(galleryItem.dataset.gallery); return; }
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape"){
+    document.querySelectorAll(".modal-overlay.open").forEach(closeModal);
+  }
+});
+
+function prefillProject(id){
+  const p = PROJECTS.find(x => x.id === id);
+  selectedProjectName = p ? p.name : "";
+}
+
+/* Project detail modal */
+function openProjectModal(id){
+  const p = PROJECTS.find(x => x.id === id);
+  if(!p) return;
+  document.getElementById("pm-img").src = p.img;
+  document.getElementById("pm-img").alt = p.name;
+  document.getElementById("pm-location").textContent = p.location;
+  document.getElementById("project-modal-title").textContent = p.name;
+  document.getElementById("pm-desc").textContent = p.desc;
+  document.getElementById("pm-specs").innerHTML = `
+    <div><span>Unit Types</span><span>${p.units}</span></div>
+    <div><span>Unit Size</span><span>${p.area}</span></div>
+    <div><span>Status</span><span>Ready for Occupancy</span></div>
+  `;
+  document.getElementById("pm-inquire-btn").onclick = () => {
+    closeModal(document.getElementById("project-modal"));
+    prefillProject(id);
+    openCalendlyPopup();
+  };
+  openModal("project-modal");
+}
+
+/* Gallery detail modal */
+function openGalleryModal(id){
+  const g = GALLERY.find(x => x.id === id);
+  if(!g) return;
+  document.getElementById("gm-img").src = g.img;
+  document.getElementById("gm-img").alt = g.title;
+  document.getElementById("gm-location").textContent = g.location;
+  document.getElementById("gallery-modal-title").textContent = g.title;
+  document.getElementById("gm-specs").innerHTML = `
+    <div><span>Unit Type</span><span>${g.type}</span></div>
+    <div><span>Size</span><span>${g.size}</span></div>
+    <div><span>Status</span><span>${g.status}</span></div>
+  `;
+  document.getElementById("gm-inquire-btn").onclick = () => {
+    closeModal(document.getElementById("gallery-modal"));
+    selectedProjectName = "";
+    openCalendlyPopup();
+  };
+  openModal("gallery-modal");
+}
+
+/* Promo claim button */
+document.getElementById("promo-claim-btn").addEventListener("click", () => {
+  closeModal(document.getElementById("promo-modal"));
+  selectedProjectName = "";
+  openCalendlyPopup();
+});
+
+/* ============================================================
+   ADVERTISEMENT POPUP AFTER 5 SECONDS (one-time per visit)
+   ============================================================ */
+let promoShown = false;
+setTimeout(() => {
+  const anyOpen = document.querySelector(".modal-overlay.open");
+  if(!promoShown && !anyOpen){
+    promoShown = true;
+    openModal("promo-modal");
+  }
+}, 5000);
+
+/* ============================================================
+   DARK / LIGHT MODE
+   ============================================================ */
+const themeToggle = document.getElementById("theme-toggle");
+const htmlEl = document.documentElement;
+const sunIcon = document.getElementById("theme-icon-sun");
+
+function setTheme(mode){
+  htmlEl.setAttribute("data-theme", mode);
+  sunIcon.innerHTML = mode === "dark"
+    ? '<path d="M21 12.5A9 9 0 1111.5 3a7 7 0 009.5 9.5z"/>'
+    : '<circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.3M12 19.2v2.3M4.4 4.4l1.6 1.6M18 18l1.6 1.6M2.5 12h2.3M19.2 12h2.3M4.4 19.6L6 18M18 6l1.6-1.6"/>';
+}
+const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+setTheme(prefersDark ? "dark" : "light");
+themeToggle.addEventListener("click", () => {
+  setTheme(htmlEl.getAttribute("data-theme") === "dark" ? "light" : "dark");
+});
+
+/* ============================================================
+   HEADER SCROLL STATE
+   ============================================================ */
+const header = document.getElementById("site-header");
+const scrollProgress = document.getElementById("scroll-progress");
+
+function onScroll(){
+  const scrolled = window.scrollY > 40;
+  header.classList.toggle("scrolled", scrolled);
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
+  if(scrollProgress) scrollProgress.style.width = pct + "%";
+}
+document.addEventListener("scroll", onScroll, {passive:true});
+onScroll();
+
+/* Mobile nav */
+const navLinks = document.getElementById("nav-links");
+const navBurger = document.getElementById("nav-burger");
+function setMobileMenu(open){
+  navLinks.classList.toggle("open", open);
+  header.classList.toggle("menu-open", open);
+  navBurger.setAttribute("aria-expanded", String(open));
+  navBurger.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+}
+navBurger.setAttribute("aria-expanded", "false");
+navBurger.addEventListener("click", () => setMobileMenu(!navLinks.classList.contains("open")));
+navLinks.addEventListener("click", e => {
+  if(e.target.tagName === "A") setMobileMenu(false);
+});
+document.addEventListener("click", e => {
+  if(!navLinks.classList.contains("open")) return;
+  if(e.target.closest("#nav-links") || e.target.closest("#nav-burger")) return;
+  setMobileMenu(false);
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") setMobileMenu(false);
+});
+
+/* ============================================================
+   TESTIMONIAL CAROUSEL
+   ============================================================ */
+const slides = document.querySelectorAll(".testimonial-slide");
+const dotsWrap = document.getElementById("testimonial-dots");
+let current = 0;
+slides.forEach((_, i) => {
+  const d = document.createElement("button");
+  d.className = "dot" + (i===0 ? " active" : "");
+  d.addEventListener("click", () => showSlide(i));
+  dotsWrap.appendChild(d);
+});
+const dots = dotsWrap.querySelectorAll(".dot");
+function showSlide(i){
+  slides[current].classList.remove("active");
+  dots[current].classList.remove("active");
+  current = i;
+  slides[current].classList.add("active");
+  dots[current].classList.add("active");
+}
+let autoRotate = setInterval(() => showSlide((current+1) % slides.length), 6000);
+document.getElementById("testimonial-wrap").addEventListener("mouseenter", () => clearInterval(autoRotate));
+document.getElementById("testimonial-wrap").addEventListener("mouseleave", () => {
+  autoRotate = setInterval(() => showSlide((current+1) % slides.length), 6000);
+});
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+function refreshRevealTargets(){
+  return document.querySelectorAll(".reveal, .stagger-grid");
+}
+if("IntersectionObserver" in window){
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.12});
+  refreshRevealTargets().forEach(el => io.observe(el));
+} else {
+  refreshRevealTargets().forEach(el => el.classList.add("in"));
+}
+
+/* Footer year */
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ============================================================
+   SHOWROOM SPOTLIGHT — cursor-tracked glow on project vitrines
+   (skipped on touch devices; there's no cursor to track)
+   ============================================================ */
+const supportsHover = window.matchMedia && window.matchMedia("(hover: hover)").matches;
+if(supportsHover){
+  gridEl.addEventListener("mousemove", e => {
+    const card = e.target.closest(".project-card");
+    if(!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    card.style.setProperty("--my", `${e.clientY - r.top}px`);
+  });
+}
+
+/* Hide the floating CTA once the dedicated contact CTA is on screen,
+   so the two don't compete for attention at the bottom of the page. */
+const floatingCta = document.getElementById("floating-cta");
+const contactCtaCard = document.querySelector(".contact-cta-card");
+if(floatingCta && contactCtaCard && "IntersectionObserver" in window){
+  const ctaObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      floatingCta.style.opacity = entry.isIntersecting ? "0" : "";
+      floatingCta.style.pointerEvents = entry.isIntersecting ? "none" : "";
+    });
+  }, {threshold:0.3});
+  ctaObserver.observe(contactCtaCard);
+}
+
+/* ============================================================
+   BACKGROUND MUSIC — autoplay + loop at 50% volume, with a
+   floating toggle. Browsers block audio-with-sound autoplay
+   until the visitor interacts with the page, so we attempt to
+   play immediately and gracefully fall back to starting on the
+   first click/keypress if that's blocked, keeping the button's
+   icon in sync with the actual playback state either way.
+   ============================================================ */
+const bgMusic = document.getElementById("bg-music");
+const musicToggle = document.getElementById("music-toggle");
+const ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>';
+
+bgMusic.volume = 0.5;
+
+function updateMusicIcon(playing){
+  musicToggle.innerHTML = playing ? ICON_PAUSE : ICON_PLAY;
+  musicToggle.classList.toggle("playing", playing);
+  musicToggle.setAttribute("aria-label", playing ? "Pause background music" : "Play background music");
+}
+
+function attemptAutoplay(){
+  const playPromise = bgMusic.play();
+  if(playPromise !== undefined){
+    playPromise.then(() => updateMusicIcon(true)).catch(() => {
+      updateMusicIcon(false);
+      const startOnFirstInteraction = () => {
+        bgMusic.play().then(() => updateMusicIcon(true)).catch(() => {});
+        document.removeEventListener("click", startOnFirstInteraction);
+        document.removeEventListener("keydown", startOnFirstInteraction);
+        document.removeEventListener("touchstart", startOnFirstInteraction);
+      };
+      document.addEventListener("click", startOnFirstInteraction, {once:true});
+      document.addEventListener("keydown", startOnFirstInteraction, {once:true});
+      document.addEventListener("touchstart", startOnFirstInteraction, {once:true});
+    });
+  }
+}
+attemptAutoplay();
+
+musicToggle.addEventListener("click", () => {
+  if(bgMusic.paused){
+    bgMusic.play().then(() => updateMusicIcon(true)).catch(() => {});
+  } else {
+    bgMusic.pause();
+    updateMusicIcon(false);
+  }
+});
+</script>
+<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
 </body>
 </html>
