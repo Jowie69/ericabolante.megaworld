@@ -512,6 +512,7 @@ html[data-theme="dark"] .hero-portrait-badge {
   display:grid;
   grid-template-columns:repeat(4,1fr);
   grid-auto-rows:220px;
+  grid-auto-flow:dense;
   gap:16px;
 }
 .gallery-item{
@@ -1205,6 +1206,43 @@ html[data-theme="dark"] .filter-tab.active{background:var(--gold);border-color:v
 .stagger-grid.in > *:nth-child(10){transition-delay:.57s;}
 .stagger-grid.in > *:nth-child(11){transition-delay:.63s;}
 .stagger-grid.in > *:nth-child(12){transition-delay:.69s;}
+
+.gallery-group{margin-bottom:56px;}
+.gallery-group:last-child{margin-bottom:0;}
+.gallery-group-head{display:flex;align-items:baseline;gap:14px;margin:0 0 22px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.gallery-group-head h3{font-family:var(--font-display);font-size:clamp(20px,2.4vw,27px);font-weight:500;margin:0;}
+.gallery-group-count{font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--gold);}
+
+/* ---- Gallery: tabs + preview + lightbox ---- */
+.gallery-tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:36px;}
+.gtab{font-size:13.5px;font-weight:600;letter-spacing:.02em;padding:9px 18px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s ease;}
+.gtab:hover{color:var(--text);border-color:var(--gold);}
+.gtab.active{background:var(--navy);border-color:var(--navy);color:#fff;box-shadow:0 8px 18px -10px rgba(10,27,50,.6);}
+.gallery-viewall{display:flex;justify-content:center;margin-top:36px;}
+.gallery-item{position:relative;}
+.gallery-item-zoom{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(20,20,20,.42);border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;color:#fff;opacity:0;transform:scale(.85);transition:all .25s ease;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);pointer-events:none;}
+.gallery-item-zoom svg{width:16px;height:16px;}
+.gallery-item:hover .gallery-item-zoom{opacity:1;transform:scale(1);}
+.lightbox{padding:0;background:rgba(8,10,16,.94);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.lightbox .modal-close{color:#fff;border-color:rgba(255,255,255,.32);top:22px;right:22px;}
+.lightbox .modal-close:hover{border-color:var(--gold);color:var(--gold);}
+.lb-stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;width:100%;max-width:1100px;padding:64px 24px;transform:translateY(20px) scale(.98);transition:transform .3s ease;}
+.lightbox.open .lb-stage{transform:translateY(0) scale(1);}
+.lb-figure{width:100%;display:flex;align-items:center;justify-content:center;}
+.lb-figure img{max-width:100%;max-height:66vh;border-radius:var(--radius-lg);box-shadow:0 40px 80px -30px rgba(0,0,0,.7);object-fit:contain;}
+.lb-caption{text-align:center;max-width:600px;}
+.lb-caption h3{font-family:var(--font-display);font-size:22px;margin:6px 0 2px;color:#fff;}
+.lb-loc{font-size:13.5px;color:rgba(255,255,255,.72);margin-bottom:14px;}
+.lightbox .pm-tag{color:var(--gold);}
+.lb-meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px;}
+.lb-meta span{font-size:12px;font-weight:600;color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px;}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:1px solid rgba(255,255,255,.28);background:rgba(20,20,20,.4);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:4;transition:all .2s ease;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+.lb-nav:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.lb-nav svg{width:22px;height:22px;}
+.lb-prev{left:24px;}
+.lb-next{right:24px;}
+.lb-counter{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;letter-spacing:.06em;color:rgba(255,255,255,.8);background:rgba(20,20,20,.42);padding:6px 14px;border-radius:999px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);}
+@media(max-width:640px){.lb-nav{width:42px;height:42px;}.lb-prev{left:10px;}.lb-next{right:10px;}.lb-figure img{max-height:54vh;}.lb-stage{padding:70px 14px;}}
 </style>
 </head>
 <body>
@@ -1348,9 +1386,13 @@ html[data-theme="dark"] .filter-tab.active{background:var(--gold);border-color:v
     <div class="section-head reveal">
       <p class="eyebrow">Property Showcase</p>
       <h2>A Glimpse Inside Your Future Home</h2>
-      <p>Real interiors from Erica's listings across Megaworld townships — click any photo for the full details.</p>
+      <p>Browse by category, then open any collection as a full-screen gallery. All 98 photos — units, amenities, floor plans, and location guides — just a click away.</p>
     </div>
-    <div class="gallery-grid stagger-grid" id="gallery-grid"></div>
+    <div class="gallery-tabs" id="gallery-tabs"></div>
+    <div class="gallery-grid stagger-grid" id="gallery-preview"></div>
+    <div class="gallery-viewall">
+      <button class="btn btn-outline" id="gallery-viewall-btn">View all photos →</button>
+    </div>
   </div>
 </section>
 
@@ -1735,6 +1777,32 @@ html[data-theme="dark"] .filter-tab.active{background:var(--gold);border-color:v
 <!-- ============================================================
      PROMO POPUP MODAL (auto after 5s)
 ============================================================ -->
+<!-- ============================================================
+     GALLERY LIGHTBOX CAROUSEL
+============================================================ -->
+<div class="modal-overlay lightbox" id="lightbox">
+  <button class="modal-close" data-close-modal aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg>
+  </button>
+  <div class="lb-stage" id="lb-stage">
+    <div class="lb-figure"><img id="lb-img" src="" alt=""></div>
+    <div class="lb-caption">
+      <span class="pm-tag" id="lb-tag">Tag</span>
+      <h3 id="lb-title">Photo Title</h3>
+      <p class="lb-loc" id="lb-loc">Location</p>
+      <div class="lb-meta" id="lb-meta"></div>
+      <button class="btn btn-gold btn-sm" id="lb-inquire">Ask Erica About This Unit</button>
+    </div>
+  </div>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next photo">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+  </button>
+  <div class="lb-counter" id="lb-counter">1 / 1</div>
+</div>
+
 <div class="modal-overlay promo-modal" id="promo-modal">
   <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="promo-title">
     <button class="modal-close" data-close-modal aria-label="Close">
@@ -1775,9 +1843,9 @@ html[data-theme="dark"] .filter-tab.active{background:var(--gold);border-color:v
    ============================================================ */
 const PROJECTS = [
   {id:"uptown-parksuites", name:"Uptown Parksuites", location:"Uptown Bonifacio, Taguig", area:"41.5 – 95 sqm",
-    units:"1BR · 2BR · 3BR", desc:"A landmark residential tower in the heart of Uptown Bonifacio, steps from BGC's business and lifestyle district.", img:"Showcase1.jpg"},
+    units:"1BR · 2BR · 3BR", desc:"A landmark residential tower in the heart of Uptown Bonifacio, steps from BGC's business and lifestyle district.", img:"uptown-parksuites-pictures/uptown-facade-1.jpeg"},
   {id:"park-mckinley-west", name:"Park McKinley West", location:"McKinley West, Taguig", area:"35 – 106 sqm",
-    units:"1BR · 2BR", desc:"Resort-inspired living within the master-planned McKinley West township, close to embassies and international schools.", img:"Showcase4.jpg"},
+    units:"1BR · 2BR", desc:"Resort-inspired living within the master-planned McKinley West township, close to embassies and international schools.", img:"uptown-parksuites-pictures/mckinley-west-amenities-1.jpg"},
   {id:"the-albany", name:"The Albany", location:"McKinley West, Taguig", area:"117 – 143 sqm",
     units:"2BR · 3BR", desc:"Spacious family-sized residences with premium finishes in one of Taguig's most exclusive enclaves.", img:"Showcase9.jpg"},
   {id:"the-florence", name:"The Florence", location:"McKinley Hill, Taguig", area:"39.5 – 95 sqm",
@@ -1795,15 +1863,104 @@ const PROJECTS = [
 ];
 
 const GALLERY = [
-  {id:"g1", title:"Balcony City View — RFO Unit", location:"Uptown Bonifacio, BGC, Taguig", type:"1-Bedroom Condominium", size:"42 sqm", status:"Ready for Occupancy", img:"Showcase1.jpg", tag:"RFO Unit", cls:"wide tall"},
-  {id:"g2", title:"Bedroom with Balcony Access", location:"McKinley West, Taguig", type:"1-Bedroom Premium Unit", size:"38 sqm", status:"Pre-selling", img:"Showcase2.jpg", tag:"Premium", cls:""},
-  {id:"g3", title:"Modern Kitchen with Wood Accents", location:"Southwoods City", type:"2-Bedroom Unit", size:"54 sqm", status:"Pre-selling", img:"Showcase3.jpg", tag:"Modern", cls:""},
-  {id:"g4", title:"Spacious Living Area", location:"McKinley West, Taguig", type:"2-Bedroom Unit", size:"68 sqm", status:"Pre-selling", img:"Showcase4.jpg", tag:"Spacious", cls:"tall"},
-  {id:"g5", title:"Open-Plan Kitchen &amp; Living Layout", location:"Southwoods City", type:"Studio — Smart Home", size:"31 sqm", status:"Pre-selling", img:"Showcase5.jpg", tag:"Smart Home", cls:""},
-  {id:"g6", title:"Elegant Bathroom with Glass Shower", location:"McKinley Hill, Taguig", type:"1-Bedroom Luxury", size:"45 sqm", status:"Ready for Occupancy", img:"Showcase6.jpg", tag:"Luxury", cls:""},
-  {id:"g7", title:"Modern Kitchen with Center Island", location:"Araneta City, Quezon City", type:"2-Bedroom with Den", size:"72 sqm", status:"Resale &amp; RFO", img:"Showcase7.jpg", tag:"Executive", cls:"wide"},
-  {id:"g8", title:"Quality Interior Finishes", location:"McKinley West, Taguig", type:"Private Estate Residence", size:"117 sqm", status:"Pre-selling", img:"Showcase8.jpg", tag:"Estate", cls:""},
-  {id:"g9", title:"Premium Design Details", location:"McKinley West, Taguig", type:"3-Bedroom Bi-level", size:"96 sqm", status:"Pre-selling", img:"Showcase9.jpg", tag:"Bi-level", cls:""}
+  {id:"g1", group:"exterior", title:"Uptown Parksuites Facade \u00b7 No. 1", location:"Uptown Bonifacio, BGC", type:"Landmark Residential Tower", size:"1BR \u00b7 2BR \u00b7 3BR", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-facade-1.jpeg", tag:"Facade", cls:"tall"},
+  {id:"g2", group:"exterior", title:"Uptown Parksuites Facade \u00b7 No. 2", location:"Uptown Bonifacio, BGC", type:"Landmark Residential Tower", size:"1BR \u00b7 2BR \u00b7 3BR", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-facade-2.jpeg", tag:"Facade", cls:"tall"},
+  {id:"g3", group:"exterior", title:"Uptown Parksuites Facade \u00b7 No. 3", location:"Uptown Bonifacio, BGC", type:"Landmark Residential Tower", size:"1BR \u00b7 2BR \u00b7 3BR", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-facade-3.jpeg", tag:"Facade", cls:"tall"},
+  {id:"g4", group:"exterior", title:"Uptown Bonifacio View \u00b7 No. 1", location:"Uptown Bonifacio, BGC", type:"Township & Tower View", size:"Uptown Bonifacio", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-image1.jpeg", tag:"Uptown", cls:"tall"},
+  {id:"g5", group:"exterior", title:"Uptown Bonifacio View \u00b7 No. 2", location:"Uptown Bonifacio, BGC", type:"Township & Tower View", size:"Uptown Bonifacio", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-image2.jpeg", tag:"Uptown", cls:"tall"},
+  {id:"g6", group:"exterior", title:"Uptown Bonifacio View \u00b7 No. 3", location:"Uptown Bonifacio, BGC", type:"Township & Tower View", size:"Uptown Bonifacio", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-image3.jpeg", tag:"Uptown", cls:"tall"},
+  {id:"g7", group:"exterior", title:"Uptown Bonifacio View \u00b7 No. 4", location:"Uptown Bonifacio, BGC", type:"Township & Tower View", size:"Uptown Bonifacio", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-image4.jpeg", tag:"Uptown", cls:"tall"},
+  {id:"g8", group:"exterior", title:"Uptown Bonifacio View \u00b7 No. 5", location:"Uptown Bonifacio, BGC", type:"Township & Tower View", size:"Uptown Bonifacio", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-image5.jpeg", tag:"Uptown", cls:"tall"},
+  {id:"g9", group:"exterior", title:"Uptown Ritz Tower \u00b7 No. 1", location:"Uptown Ritz, BGC", type:"Landmark Residential Tower", size:"2BR \u00b7 83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-ritz-1.jpeg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g10", group:"exterior", title:"Uptown Ritz Tower \u00b7 No. 2", location:"Uptown Ritz, BGC", type:"Landmark Residential Tower", size:"2BR \u00b7 83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/uptown-ritz-2.jpeg", tag:"Uptown Ritz", cls:""},
+  {id:"g11", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 1", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g12", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 2", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony10.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g13", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 3", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony11.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g14", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 4", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony2.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g15", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 5", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony3.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g16", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 6", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony4.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g17", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 7", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony5.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g18", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 8", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony6.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g19", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 9", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony7.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g20", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 10", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony8.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g21", group:"br1", title:"1-Bedroom with Balcony \u00b7 No. 11", location:"Uptown Bonifacio, BGC", type:"1-Bedroom", size:"With Balcony", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1-br-with-balcony9.jpeg", tag:"1BR Balcony", cls:"tall"},
+  {id:"g22", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 1", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-1.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g23", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 2", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-2.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g24", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 3", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-3.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g25", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 4", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-4.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g26", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 5", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-5.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g27", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 6", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-6.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g28", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 7", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-7.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g29", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 8", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-8.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g30", group:"br1", title:"1-Bedroom Suite with Balcony \u00b7 No. 9", location:"Uptown Bonifacio, BGC", type:"1-Bedroom Suite", size:"65 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-suite-with-balcony-65sqm-9.jpg", tag:"Suite \u00b7 65 sqm", cls:""},
+  {id:"g31", group:"br1", title:"1-Bedroom Unit \u00b7 No. 1", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-1.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g32", group:"br1", title:"1-Bedroom Unit \u00b7 No. 2", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-10.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g33", group:"br1", title:"1-Bedroom Unit \u00b7 No. 3", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-2.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g34", group:"br1", title:"1-Bedroom Unit \u00b7 No. 4", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-3.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g35", group:"br1", title:"1-Bedroom Unit \u00b7 No. 5", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-4.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g36", group:"br1", title:"1-Bedroom Unit \u00b7 No. 6", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-5.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g37", group:"br1", title:"1-Bedroom Unit \u00b7 No. 7", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-6.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g38", group:"br1", title:"1-Bedroom Unit \u00b7 No. 8", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-7.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g39", group:"br1", title:"1-Bedroom Unit \u00b7 No. 9", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-8.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g40", group:"br1", title:"1-Bedroom Unit \u00b7 No. 10", location:"One Uptown Residence, BGC", type:"1-Bedroom", size:"36 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/1br-unit-36sqm-9.jpg", tag:"1BR \u00b7 36 sqm", cls:"tall"},
+  {id:"g41", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 1", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-1.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g42", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 2", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-2.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g43", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 3", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-3.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g44", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 4", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-4.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g45", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 5", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-5.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g46", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 6", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-6.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g47", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 7", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-7.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g48", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 8", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-8.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g49", group:"br2", title:"2-Bedroom at Uptown Ritz \u00b7 No. 9", location:"Uptown Ritz, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-unit-83sqm-uptown-ritz-9.jpg", tag:"Uptown Ritz", cls:"tall"},
+  {id:"g50", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 1", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-1.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g51", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 2", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-2.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g52", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 3", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-3.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g53", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 4", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-4.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g54", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 5", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-5.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g55", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 6", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-6.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g56", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 7", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-7.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g57", group:"br2", title:"2-Bedroom with Balcony \u00b7 No. 8", location:"Uptown Bonifacio, BGC", type:"2-Bedroom", size:"83 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/2br-with-balcony-83sqm-8.jpg", tag:"2BR Balcony", cls:"tall"},
+  {id:"g58", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 1", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-1-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g59", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 2", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-10-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g60", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 3", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-11-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g61", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 4", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-2-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g62", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 5", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-3-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g63", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 6", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g64", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 7", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-4-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g65", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 8", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-5-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g66", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 9", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-6-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g67", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 10", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-7-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g68", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 11", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-8-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:""},
+  {id:"g69", group:"br3", title:"3-Bedroom Residence Interior \u00b7 No. 12", location:"Uptown Bonifacio, BGC", type:"3-Bedroom", size:"89 sqm", status:"Ready for Occupancy", img:"uptown-parksuites-pictures/interior-9-3br-89sqm.jpeg", tag:"3BR \u00b7 89 sqm", cls:"tall"},
+  {id:"g70", group:"amenities", title:"Recreation & Game Room", location:"Uptown Bonifacio Amenities", type:"Building Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/ameneties-game-room.jpeg", tag:"Amenity", cls:"tall"},
+  {id:"g71", group:"amenities", title:"Landscaped Garden Deck", location:"Uptown Bonifacio Amenities", type:"Building Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/ameneties-garden.jpeg", tag:"Amenity", cls:"tall"},
+  {id:"g72", group:"amenities", title:"Garden Lounge", location:"Uptown Bonifacio Amenities", type:"Building Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/ameneties-garden2.jpeg", tag:"Amenity", cls:"tall"},
+  {id:"g73", group:"amenities", title:"Resort-Style Swimming Pool", location:"Uptown Bonifacio Amenities", type:"Building Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/ameneties-swimming-pool.jpeg", tag:"Amenity", cls:"tall"},
+  {id:"g74", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 1", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-1.jpg", tag:"McKinley West", cls:""},
+  {id:"g75", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 2", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-10.jpg", tag:"McKinley West", cls:""},
+  {id:"g76", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 3", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-2.jpg", tag:"McKinley West", cls:""},
+  {id:"g77", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 4", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-4.jpg", tag:"McKinley West", cls:""},
+  {id:"g78", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 5", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-5.jpg", tag:"McKinley West", cls:""},
+  {id:"g79", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 6", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-6.jpg", tag:"McKinley West", cls:""},
+  {id:"g80", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 7", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-7.jpg", tag:"McKinley West", cls:""},
+  {id:"g81", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 8", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-8.jpg", tag:"McKinley West", cls:""},
+  {id:"g82", group:"amenities", title:"Park McKinley West Amenities \u00b7 No. 9", location:"McKinley West, Taguig", type:"Township Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-9.jpg", tag:"McKinley West", cls:""},
+  {id:"g83", group:"amenities", title:"Park McKinley West \u2014 Indoor Amenities", location:"McKinley West, Taguig", type:"Township Amenity", size:"Indoor", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-indoor.jpeg", tag:"McKinley West", cls:"wide"},
+  {id:"g84", group:"amenities", title:"Park McKinley West \u2014 Outdoor Amenities", location:"McKinley West, Taguig", type:"Township Amenity", size:"Outdoor", status:"Available to Residents", img:"uptown-parksuites-pictures/mckinley-west-amenities-outdoor.jpeg", tag:"McKinley West", cls:"wide"},
+  {id:"g85", group:"amenities", title:"Uptown Ritz Amenities & Facilities", location:"Uptown Ritz, BGC", type:"Building Amenity", size:"Resort-Inspired", status:"Available to Residents", img:"uptown-parksuites-pictures/uptown-ritz-amenities-and-facilities.jpeg", tag:"Uptown Ritz", cls:""},
+  {id:"g86", group:"floorplans", title:"1-Bedroom 36 sqm Floor Plan", location:"One Uptown Residence, BGC", type:"Unit Floor Plan", size:"36 sqm", status:"Reference Layout", img:"uptown-parksuites-pictures/1br-36sqm-one-uptown-floorplab.jpeg", tag:"Floor Plan", cls:""},
+  {id:"g87", group:"floorplans", title:"2-Bedroom 83 sqm Floor Plan", location:"Uptown Bonifacio, BGC", type:"Unit Floor Plan", size:"83 sqm", status:"Reference Layout", img:"uptown-parksuites-pictures/floorplan-2br-with-balcony-83sqm.jpeg", tag:"Floor Plan", cls:""},
+  {id:"g88", group:"floorplans", title:"3-Bedroom 89 sqm Floor Plan", location:"Uptown Bonifacio, BGC", type:"Unit Floor Plan", size:"89 sqm", status:"Reference Layout", img:"uptown-parksuites-pictures/floorplan-3br-89sqm.jpeg", tag:"Floor Plan", cls:"tall"},
+  {id:"g89", group:"floorplans", title:"Uptown Ritz Typical Floor Plan", location:"Uptown Ritz, BGC", type:"Building Floor Plan", size:"8th\u201339th Floor", status:"Reference Layout", img:"uptown-parksuites-pictures/uptown-ritz-typical8th-39th-floor-plan.jpeg", tag:"Floor Plan", cls:""},
+  {id:"g90", group:"location", title:"Park McKinley West Vicinity Map \u00b7 No. 1", location:"McKinley West, Taguig", type:"Location Map", size:"Township", status:"Location Guide", img:"uptown-parksuites-pictures/mckinley-west-vicinity-map.jpeg", tag:"Location", cls:""},
+  {id:"g91", group:"location", title:"Park McKinley West Vicinity Map \u00b7 No. 2", location:"McKinley West, Taguig", type:"Location Map", size:"Township", status:"Location Guide", img:"uptown-parksuites-pictures/mckinley-west-vicinity-map2.jpeg", tag:"Location", cls:""},
+  {id:"g92", group:"location", title:"One Uptown Residence Site Plan", location:"Uptown Bonifacio, BGC", type:"Site Development Plan", size:"Master Plan", status:"Location Guide", img:"uptown-parksuites-pictures/one-uptown-residence-site-development-plan.jpeg", tag:"Site Plan", cls:""},
+  {id:"g93", group:"location", title:"Uptown Ritz Location Map", location:"Uptown Ritz, BGC", type:"Location Map", size:"Uptown Bonifacio", status:"Location Guide", img:"uptown-parksuites-pictures/uptown-ritz-location.jpeg", tag:"Location", cls:""},
+  {id:"g94", group:"featured", title:"Additional Available Inventory \u00b7 No. 1", location:"Megaworld RFO", type:"Available Units", size:"RFO", status:"Available Now", img:"uptown-parksuites-pictures/additional-inventory-1.jpeg", tag:"Inventory", cls:""},
+  {id:"g95", group:"featured", title:"Additional Available Inventory \u00b7 No. 2", location:"Megaworld RFO", type:"Available Units", size:"RFO", status:"Available Now", img:"uptown-parksuites-pictures/additional-inventory-2.jpeg", tag:"Inventory", cls:"tall"},
+  {id:"g96", group:"featured", title:"Featured Listing \u00b7 No. 1", location:"Megaworld RFO", type:"Promo Highlight", size:"Limited Offer", status:"Available Now", img:"uptown-parksuites-pictures/poster1.jpeg", tag:"Featured", cls:""},
+  {id:"g97", group:"featured", title:"Featured Listing \u00b7 No. 2", location:"Megaworld RFO", type:"Promo Highlight", size:"Limited Offer", status:"Available Now", img:"uptown-parksuites-pictures/poster2.jpeg", tag:"Featured", cls:"wide"},
+  {id:"g98", group:"featured", title:"Featured Listing \u00b7 No. 3", location:"Megaworld RFO", type:"Promo Highlight", size:"Limited Offer", status:"Available Now", img:"uptown-parksuites-pictures/poster3.jpeg", tag:"Featured", cls:""},
 ];
 
 const LOCATIONS = ["All", ...new Set(PROJECTS.map(p => p.location.split(",")[0]))];
@@ -1811,17 +1968,115 @@ const LOCATIONS = ["All", ...new Set(PROJECTS.map(p => p.location.split(",")[0])
 /* ============================================================
    RENDER: GALLERY GRID
    ============================================================ */
-const galleryGridEl = document.getElementById("gallery-grid");
-galleryGridEl.innerHTML = GALLERY.map(g => `
-  <div class="gallery-item ${g.cls}" data-gallery="${g.id}">
-    <img src="${g.img}" alt="${g.title} — Erica Cristal listings" loading="lazy">
-    <div class="gallery-item-overlay">
-      <span class="gallery-item-tag">${g.tag}</span>
-      <span class="gallery-item-title">${g.title}</span>
-      <span class="gallery-item-loc">${g.location}</span>
-    </div>
-  </div>
-`).join("");
+const GALLERY_GROUPS = [
+  {key:"exterior", label:"Building & Exterior"},
+  {key:"br1", label:"1-Bedroom"},
+  {key:"br2", label:"2-Bedroom"},
+  {key:"br3", label:"3-Bedroom"},
+  {key:"amenities", label:"Amenities"},
+  {key:"floorplans", label:"Floor Plans"},
+  {key:"location", label:"Location"},
+  {key:"featured", label:"Featured"}
+];
+const GALLERY_TABS = [{key:"all", label:"All Photos"}].concat(GALLERY_GROUPS);
+const PREVIEW_COUNT = 8;
+function galleryItemsFor(key){ return key === "all" ? GALLERY : GALLERY.filter(g => g.group === key); }
+function galleryCurated(key){
+  if(key === "all"){
+    const out = [];
+    GALLERY_GROUPS.forEach(gr => { out.push(...GALLERY.filter(g => g.group === gr.key).slice(0,2)); });
+    return out.slice(0,12);
+  }
+  return galleryItemsFor(key).slice(0, PREVIEW_COUNT);
+}
+let galleryActiveTab = "all";
+const gTabsEl = document.getElementById("gallery-tabs");
+const gPreviewEl = document.getElementById("gallery-preview");
+const gViewAllEl = document.getElementById("gallery-viewall-btn");
+function renderGalleryTabs(){
+  gTabsEl.innerHTML = GALLERY_TABS.map(t =>
+    `<button class="gtab${t.key===galleryActiveTab?" active":""}" data-gtab="${t.key}">${t.label}</button>`
+  ).join("");
+}
+function renderGalleryPreview(){
+  const items = galleryCurated(galleryActiveTab);
+  gPreviewEl.innerHTML = items.map(g => `
+    <div class="gallery-item" data-lb="${g.id}">
+      <img src="${g.img}" alt="${g.title} \u2014 ${g.location}" loading="lazy">
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-tag">${g.tag}</span>
+        <span class="gallery-item-title">${g.title}</span>
+        <span class="gallery-item-loc">${g.location}</span>
+      </div>
+      <span class="gallery-item-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span>
+    </div>`).join("");
+  gPreviewEl.classList.remove("in"); void gPreviewEl.offsetWidth; gPreviewEl.classList.add("in");
+  const total = galleryItemsFor(galleryActiveTab).length;
+  gViewAllEl.textContent = `View all ${total} photos \u2192`;
+}
+renderGalleryTabs();
+renderGalleryPreview();
+gTabsEl.addEventListener("click", e => {
+  const btn = e.target.closest(".gtab");
+  if(!btn) return;
+  galleryActiveTab = btn.dataset.gtab;
+  renderGalleryTabs();
+  renderGalleryPreview();
+});
+gPreviewEl.addEventListener("click", e => {
+  const tile = e.target.closest("[data-lb]");
+  if(!tile) return;
+  openLightbox(galleryActiveTab, tile.dataset.lb);
+});
+gViewAllEl.addEventListener("click", () => {
+  const items = galleryItemsFor(galleryActiveTab);
+  if(items.length) openLightbox(galleryActiveTab, items[0].id);
+});
+let lbItems = [];
+let lbIndex = 0;
+function renderLightbox(){
+  const g = lbItems[lbIndex];
+  if(!g) return;
+  const img = document.getElementById("lb-img");
+  img.src = g.img; img.alt = g.title + " \u2014 " + g.location;
+  document.getElementById("lb-tag").textContent = g.tag;
+  document.getElementById("lb-title").textContent = g.title;
+  document.getElementById("lb-loc").textContent = g.location;
+  document.getElementById("lb-meta").innerHTML = `<span>${g.type}</span><span>${g.size}</span><span>${g.status}</span>`;
+  document.getElementById("lb-counter").textContent = (lbIndex+1) + " / " + lbItems.length;
+}
+function openLightbox(tabKey, id){
+  lbItems = galleryItemsFor(tabKey);
+  const i = lbItems.findIndex(g => g.id === id);
+  lbIndex = i < 0 ? 0 : i;
+  renderLightbox();
+  openModal("lightbox");
+}
+function lbNext(){ if(!lbItems.length) return; lbIndex = (lbIndex+1)%lbItems.length; renderLightbox(); }
+function lbPrev(){ if(!lbItems.length) return; lbIndex = (lbIndex-1+lbItems.length)%lbItems.length; renderLightbox(); }
+document.getElementById("lb-next").addEventListener("click", e => { e.stopPropagation(); lbNext(); });
+document.getElementById("lb-prev").addEventListener("click", e => { e.stopPropagation(); lbPrev(); });
+document.getElementById("lb-inquire").addEventListener("click", () => {
+  closeModal(document.getElementById("lightbox"));
+  selectedProjectName = "";
+  openCalendlyPopup();
+});
+document.addEventListener("keydown", e => {
+  if(!document.getElementById("lightbox").classList.contains("open")) return;
+  if(e.key === "ArrowRight") lbNext();
+  else if(e.key === "ArrowLeft") lbPrev();
+});
+(function(){
+  const stage = document.getElementById("lb-stage");
+  let x0 = null;
+  stage.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, {passive:true});
+  stage.addEventListener("touchend", e => {
+    if(x0 === null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx) > 40){ dx < 0 ? lbNext() : lbPrev(); }
+    x0 = null;
+  }, {passive:true});
+})();
 
 /* ============================================================
    RENDER: PROJECT FILTERS + GRID
@@ -1895,16 +2150,20 @@ tabsEl.addEventListener("click", e => {
    RENDER: VIDEO TOURS REEL WALL
    ============================================================ */
 const REELS = [
-  {src:"Video1.mp4", fallback:"https://www.facebook.com/reel/1556840669190677"},
-  {src:"Video2.mp4", fallback:"https://www.facebook.com/reel/1329810749199180"},
-  {src:"Video3.mp4", fallback:"https://www.facebook.com/reel/1948524715790318"},
-  {src:"Video4.mp4", fallback:"https://www.facebook.com/reel/1769858687698135"}
+  {src:"uptown-parksuites-pictures/room-tour.mp4", label:"Full Room Tour", fallback:"https://www.facebook.com/share/1CmyTsy7iQ/?mibextid=wwXIfr"},
+  {src:"uptown-parksuites-pictures/reels1.mp4", label:"Unit Reel 1", fallback:"https://www.facebook.com/share/1CmyTsy7iQ/?mibextid=wwXIfr"},
+  {src:"uptown-parksuites-pictures/reels2.mp4", label:"Unit Reel 2", fallback:"https://www.facebook.com/share/1CmyTsy7iQ/?mibextid=wwXIfr"},
+  {src:"uptown-parksuites-pictures/reels3.mp4", label:"Unit Reel 3", fallback:"https://www.facebook.com/share/1CmyTsy7iQ/?mibextid=wwXIfr"},
+  {src:"Video1.mp4", label:"Property Tour", fallback:"https://www.facebook.com/reel/1556840669190677"},
+  {src:"Video2.mp4", label:"Property Tour", fallback:"https://www.facebook.com/reel/1329810749199180"},
+  {src:"Video3.mp4", label:"Property Tour", fallback:"https://www.facebook.com/reel/1948524715790318"},
+  {src:"Video4.mp4", label:"Property Tour", fallback:"https://www.facebook.com/reel/1769858687698135"}
 ];
 const reelWallEl = document.getElementById("reel-wall");
 reelWallEl.innerHTML = REELS.map((r,i) => `
   <div class="reel-frame">
     <div class="reel-video-wrap">
-      <span class="reel-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg> Tour ${i+1}</span>
+      <span class="reel-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l5-3v10l-5-3z"/><rect x="3" y="6" width="12" height="12" rx="2"/></svg> ${r.label || 'Tour ' + (i+1)}</span>
       <video autoplay loop muted playsinline controls preload="metadata" title="Property tour reel ${i+1}">
         <source src="${r.src}" type="video/mp4">
         Your browser does not support the video tag.
